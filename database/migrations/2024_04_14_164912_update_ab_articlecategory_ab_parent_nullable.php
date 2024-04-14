@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ab_user', function (Blueprint $table) {
-            $table->id()->primary();
-            $table->string('ab_name', 80)->unique();
-            $table->string('ab_password', 200);
-            $table->string('ab_email', 200)->unique();
+        Schema::table('ab_articlecategory', function (Blueprint $table) {
+            //
+            $table->unsignedBigInteger('ab_parent')->nullable()->change();
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ab_user');
+        Schema::table('ab_articlecategory', function (Blueprint $table) {
+            //
+        });
     }
 };

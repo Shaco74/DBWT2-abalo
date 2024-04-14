@@ -9,10 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(Blueprint $table): void
+    public function up(): void
     {
 
-        Schema::create('ab_testdata', function (Blueprint $table){
+        Schema::create('ab_article', function (Blueprint $table){
         $table->id()->primary();
 
         $table->string('ab_name',80);
