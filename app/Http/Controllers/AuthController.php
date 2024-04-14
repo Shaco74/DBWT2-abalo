@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
  * Write static login information to the session.
  * Use for test purposes.
  */
-class AuthController extends Controller
-{
+class AuthController extends Controller {
     public function login(Request $request) {
         $request->session()->put('abalo_user', 'visitor');
         $request->session()->put('abalo_mail', 'visitor@abalo.example.com');
@@ -24,13 +23,12 @@ class AuthController extends Controller
 
 
     public function isLoggedIn(Request $request) {
-        if($request->session()->has('abalo_user')) {
+        if ($request->session()->has('abalo_user')) {
             $r["user"] = $request->session()->get('abalo_user');
             $r["time"] = $request->session()->get('abalo_time');
             $r["mail"] = $request->session()->get('abalo_mail');
             $r["auth"] = "true";
-        }
-        else $r["auth"]="false";
+        } else $r["auth"] = "false";
         return response()->json($r);
     }
 }
