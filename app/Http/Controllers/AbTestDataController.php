@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AbTestData;
+use App\Models\SearchArticle;
 use Illuminate\Http\Request;
 
 class AbTestDataController extends Controller {
     public function index() {
-        $testData = AbTestData::all();
+        $testData = SearchArticle::all();
         return view('testdata.index', ['testData' => $testData]);
     }
 
     public function store(Request $request) {
         $data = $request->validate(['ab_testname' => ['required'],]);
 
-        return AbTestData::create($data);
+        return SearchArticle::create($data);
     }
 
-    public function show(AbTestData $abTestData) {
+    public function show(SearchArticle $abTestData) {
         return $abTestData;
     }
 
-    public function update(Request $request, AbTestData $abTestData) {
+    public function update(Request $request, SearchArticle $abTestData) {
         $data = $request->validate(['ab_testname' => ['required'],]);
 
         $abTestData->update($data);
@@ -29,7 +29,7 @@ class AbTestDataController extends Controller {
         return $abTestData;
     }
 
-    public function destroy(AbTestData $abTestData) {
+    public function destroy(SearchArticle $abTestData) {
         $abTestData->delete();
 
         return response()->json();
