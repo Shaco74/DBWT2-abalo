@@ -9,7 +9,12 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller {
 
-
+    /** Used to display searched Articles using URL query parameters. <br>
+     *  If no search term is provided, all articles are displayed
+     *
+     *
+     * @param Request $request The request object containing the search term.
+     */
     public function index(Request $request) {
         $searchTerm = $request->input('search');
 
