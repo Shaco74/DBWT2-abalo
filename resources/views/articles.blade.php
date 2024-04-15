@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article Overview</title>
 </head>
+@php
+    use App\Helpers\ImageHelper;
+@endphp
 <body>
 <h1>Article Overview</h1>
 
@@ -16,22 +19,22 @@
     <button type="submit">Search</button>
 </form>
 
-<table>
+<table style="border-collapse: collapse">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-
+        <th>Article Image</th>
     </tr>
     </thead>
     <tbody>
     @foreach($articles as $article)
-        <tr>
+        <tr style="border: 2px solid #9ca3af">
             <td>{{ $article->id }}</td>
             <td>{{ $article->ab_name }}</td>
             <td>{{ $article->description }}</td>
-            <!-- weitere Spalten nach Bedarf -->
+            <td>{!! ImageHelper::renderImageIfPresent($article->image) !!}</td>
         </tr>
     @endforeach
     </tbody>
