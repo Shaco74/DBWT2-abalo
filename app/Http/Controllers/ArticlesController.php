@@ -18,7 +18,7 @@ class ArticlesController extends Controller {
     public function index(Request $request) {
         $searchTerm = $request->input('search');
 
-        // Datenbankabfrage, um Artikel zu finden, die den Suchbegriff enthalten
+        // search for articles with the search term in the article name
         $articles = SearchArticle::query()->where('ab_name', 'ilike', "%$searchTerm%")->get();
 
         if ($articles->isEmpty()) {
