@@ -21,7 +21,7 @@ class AbUserFactory extends Factory {
      */
     public function definition(): array {
         return [
-            'ab_name' => $this->faker->name(),
+            'ab_name' => $this->faker->unique()->name(),
             'ab_email' => $this->faker->unique()->safeEmail(),
             'ab_password' => $this->faker->password(),
         ];
