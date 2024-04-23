@@ -75,6 +75,7 @@ class DevelopmentData extends Seeder {
         }
         DB::table('ab_user')->insert([
             'ab_name' => $data[1],
+            // TODO: verschlüsselung fehlt
             'ab_password' => $data[2],
             'ab_email' => $data[3],
         ]);
@@ -97,6 +98,7 @@ class DevelopmentData extends Seeder {
      * @return void
      */
     private function handleArticleCSV(): void {
+        // TODO: add descriptor
         $articleRows = $this->getDataRowsFromFile(storage_path('seeding/development/articles.csv'));
         foreach ($articleRows as $articleEntry) {
             $data = str_getcsv($articleEntry, ';');

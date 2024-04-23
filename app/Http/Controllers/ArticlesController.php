@@ -40,6 +40,7 @@ class ArticlesController extends Controller {
         if (file_exists($articleImage)) {
             return asset($imagePath);
         } else {
+            // TODO: look for .png file
             return "";
         }
     }
