@@ -69,17 +69,16 @@ class DevelopmentData extends Seeder {
      * @param array $data The row of user data to process.
      * @return void
      */
-    private function processUserRowAndInsert(array $data): void {
-        if (!$this->hasExpectedColumns($data, 4)) {
-            return;
-        }
-        DB::table('ab_user')->insert([
-            'ab_name' => $data[1],
-            // TODO: verschlüsselung fehlt
-            'ab_password' => $data[2],
-            'ab_email' => $data[3],
-        ]);
+private function processUserRowAndInsert(array $data): void {
+    if (!$this->hasExpectedColumns($data, 4)) {
+        return;
     }
+    DB::table('ab_user')->insert([
+        'ab_name' => $data[1],
+        'ab_password' => bcrypt($data[2]),
+        'ab_email' => $data[3],
+    ]);
+}
 
     /**
      * Checks if an array has the expected number of columns.

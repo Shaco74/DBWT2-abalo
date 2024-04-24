@@ -35,13 +35,14 @@ class ArticlesController extends Controller {
 
     private function getArticleImage($article) {
         $articleId = $article->id;
-        $imagePath = 'media/articleImages/' . $articleId . '.jpg';
-        $articleImage = public_path($imagePath);
-        if (file_exists($articleImage)) {
-            return asset($imagePath);
-        } else {
-            // TODO: look for .png file
-            return "";
-        }
+
+        $jpgImagePath = 'media/articleImages/' . $articleId . '.jpg';
+        $pngImagePath = 'media/articleImages/' . $articleId . '.png';
+        $jpgArticleImage = public_path($jpgImagePath);
+        $pngArticleImage = public_path($pngImagePath);
+
+        return
+            file_exists($jpgArticleImage) ? $jpgImagePath :
+            (file_exists($pngArticleImage) ? $pngImagePath : '');
     }
 }
