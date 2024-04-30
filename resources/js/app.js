@@ -1,11 +1,13 @@
-// resources/js/app.js
 import { createApp } from 'vue';
-import Navigation from './Navigation.vue'; // Example import of a Vue component
+import Navigation from './Navigation.vue';
+import CookieDialog from './util/CookieDialog.vue'
 
 const app = createApp({
     // Configuration options
+    components: {
+        'x-navigation': Navigation,
+        'x-cookiedialog': CookieDialog
+    },
 });
-
-app.component('x-navigation', Navigation); // Register the Navigation component globally
 
 app.mount('#app'); // Mount the Vue app to a specific HTML element

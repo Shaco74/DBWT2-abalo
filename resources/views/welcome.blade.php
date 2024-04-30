@@ -12,8 +12,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 
+    <!-- Custom Scripts -->
     @vite(['resources/js/app.js'])
-
+    
     <!-- Styles -->
     @vite('resources/css/app.css')
     <style>
@@ -50,12 +51,14 @@
             @endif
         @endauth
     @endif
+        <div id="app">
+            @verbatim
 
-    <div id="app">
-        @verbatim
-            <x-navigation/>
-        @endverbatim
-    </div>
+            <x-cookiedialog/>
+            @endverbatim
+        </div>
+
+
 </header>
 <h1 class="text-2xl">Home Page</h1>
 </body>
