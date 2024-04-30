@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('ab_articlecategory_id');
             $table->unsignedBigInteger('ab_article_id');
+            //$table->unique()
         });
     }
 

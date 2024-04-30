@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HalloWeltJS</title>
+    </head>
+    <body>
+        <button id="wjs">Here is a Warning</button>
+        <button id="fjs">Here is a fail</button>
+        <button id="ijs">Here is an Info</button>
+        <script>
+            "use strict";
+
+            if (document.getElementById("hwjs") != null)
+                document
+                    .getElementById("hwjs")
+                    .addEventListener("click", () =>
+                        console.warn("Hallo Warnung!")
+                    );
+
+            if (document.getElementById("ijs") != null)
+                document
+                    .getElementById("ijs")
+                    .addEventListener("click", () =>
+                        console.info("Hallo Info!")
+                    );
+
+            if (document.getElementById("fjs") != null)
+                document
+                    .getElementById("fjs")
+                    .addEventListener("click", () =>
+                        console.error("Hallo Fehler!")
+                    );
+        </script>
+    </body>
+</html>

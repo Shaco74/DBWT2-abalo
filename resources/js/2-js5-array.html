@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HalloWeltJS</title>
+    </head>
+    <body>
+        <button id="hwjs">Click me</button>
+        <script>
+            "use strict";
+            var arr = ["erstes", "pyhton", 3, 4, 5];
+            for (var i = 0; i < arr.length; i++) {
+                console.log(arr[i]);
+            }
+
+            arr.push("neues");
+            for (var i = 0; i < arr.length; i++) {
+                console.log(arr[i]);
+            }
+
+            arr.pop();
+            for (var i of arr) {
+                console.log(i);
+            }
+
+            arr[1] = "neueres";
+            do {
+                console.log(arr.shift());
+            } while (arr.length > 0);
+
+            arr.sort();
+            for (var i of arr) {
+                console.log(i);
+            }
+
+            console.log(arr.length);
+            arr.find((element) => {
+                console.log("Element: " + element);
+            });
+        </script>
+    </body>
+</html>
