@@ -15,15 +15,14 @@
     </div>
     <div class="flex">
         <div class="basis-1/4"></div>
-        <div class="basis-1/2 justify-center">
-            <h1>Article Overview</h1>
+        <div class="basis-1/2">
+            <div>
             <form action="{{ url('/articles') }}" method="get">
-                <label for="search">Search:</label>
-                <input type="text" id="search" name="search" value="{{ request()->input('search') }}">
-                <button type="submit">Search</button>
+                <input type="text" id="search" name="search" value="{{ request()->input('search') }}" class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline" placeholder="Search">
             </form>
-            <div class="h-vh">
-                <table style="border-collapse: collapse " class="text-red-100 bg-stone-600 ">
+            </div>
+               <div class="flex justify-center">
+                <table style="border-collapse: collapse " class="text-red-100 bg-stone-600">
                     <thead class="bg-stone-800 text-red-200">
                     <tr>
                         <th>ID</th>
@@ -35,19 +34,19 @@
                     </thead>
                     <tbody>
                     @foreach($articles as $article)
-                        <tr style="border: 2px solid #9ca3af">
+                        <tr style="border: 2px solid #9ca3af;">
                             <td>{{ $article->id }}</td>
                             <td>{{ $article->ab_name }}</td>
                             <td>{{ $article->description }}</td>
                             <td>{!! ImageHelper::renderImageIfPresent($article->image) !!}</td>
-                            <td>
-                                <button onclick="addToCart('{{ $article->ab_name }}')">+</button>
+                            <td class="bg-stone-800">
+                                <button onclick="addToCart('{{ $article->ab_name }}')" class="w-full">+</button>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-            </div>
+        </div>
         </div>
         <div class="basis-1/4">
             <div class="mb-4">
@@ -60,7 +59,6 @@
                     </tr>
                     </thead>
                     <tbody id="cart-body">
-                    <!-- Hier wird der Warenkorbinhalt dynamisch eingefügt -->
                     </tbody>
                 </table>
             </div>
@@ -98,7 +96,7 @@
             <tr>
                 <td style="padding: 0.5rem; border: 1px solid #9ca3af; color: white;">${article}</td>
                 <td style="border: 1px solid #9ca3af;">
-                    <button onclick="removeFromCart('${article}')" style="margin-left: 1rem; color: white;">-</button>
+                    <button onclick="removeFromCart('${article}')" style="margin: 1rem; color: white; ">-</button>
                 </td>
             </tr>
         `;
