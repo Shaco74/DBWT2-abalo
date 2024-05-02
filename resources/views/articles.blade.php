@@ -70,58 +70,52 @@
 
 
 <script>
-    window.cart = [];
+    // Globale Warenkorb-Variable
+    const cart = [];
 
-    function addToCart(article) {
-        if(window.cart.includes(article)) {
+    // Funktion zum Hinzufügen eines Artikels zum Warenkorb
+    const addToCart = (article) => {
+        if(cart.includes(article)) {
             return;
         }
         console.log('Add to cart');
-        window.cart.push(article);
+        cart.push(article);
         updateCart();
-    }
+    };
 
-    function removeFromCart(article) {
-        const index = window.cart.indexOf(article);
+    // Funktion zum Entfernen eines Artikels aus dem Warenkorb
+    const removeFromCart = (article) => {
+        const index = cart.indexOf(article);
         if (index !== -1) {
-            window.cart.splice(index, 1);
+            cart.splice(index, 1);
             updateCart();
         }
-    }
+    };
 
-    function updateCart() {
-        // Holen Sie sich das Warenkorbtabelle Body-Element
+    // Funktion zum Erstellen eines HTML-Elements für einen Warenkorbartikel
+    const createCartItemElement = (article) => {
+        return `
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #9ca3af; color: white;">${article}</td>
+                <td style="border: 1px solid #9ca3af;">
+                    <button onclick="removeFromCart('${article}')" style="margin-left: 1rem; color: white;">-</button>
+                </td>
+            </tr>
+        `;
+    };
+
+    // Funktion zum Aktualisieren des Warenkorbs
+    const updateCart = () => {
         const cartBody = document.getElementById('cart-body');
         cartBody.innerHTML = '';
 
-        // Fügen Sie jedes Element im Warenkorb erneut hinzu
-        window.cart.forEach((article) => {
-            // Erstellen Sie eine Zeile für den Artikel
-            const row = document.createElement('tr');
-
-            // Erstellen Sie eine Zelle für den Artikelnamen
-            const nameCell = document.createElement('td');
-            nameCell.textContent = article;
-            nameCell.style.padding = '0.5rem';
-            nameCell.style.border = '1px solid #9ca3af';
-            nameCell.style.color = 'white';
-
-            // Erstellen Sie eine Zelle für den Button zum Entfernen des Artikels
-            const removeCell = document.createElement('td');
-            const removeButton = document.createElement('button');
-            removeButton.textContent = '-';
-            removeButton.onclick = () => removeFromCart(article);
-            removeButton.style.marginLeft = '1rem';
-            removeCell.appendChild(removeButton);
-            removeButton.style.color = 'white';
-            removeCell.style.border = '1px solid #9ca3af';
-
-            // Fügen Sie die Zellen zur Zeile hinzu
-            row.appendChild(nameCell);
-            row.appendChild(removeCell);
-
-            // Fügen Sie die Zeile zum Warenkorb-Body hinzu
-            cartBody.appendChild(row);
+        cart.forEach((article) => {
+            cartBody.innerHTML += createCartItemElement(article);
         });
-    }
+    };
+
+    // Globale Warenkorb-Variable an das Fensterobjekt anhängen
+    window.cart = cart;
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
 </script>
