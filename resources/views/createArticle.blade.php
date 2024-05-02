@@ -12,7 +12,7 @@
                 <div id="app">
                     @verbatim
                         <x-navigation></x-navigation>
-                        <x-new-article/>
+                        <x-new-article></x-new-article>
                     @endverbatim
                 </div>
             </div>

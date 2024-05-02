@@ -8,7 +8,7 @@ const app = createApp({
     components: {
         'x-navigation': Navigation,
         'x-cookie-dialog': CookieDialog,
-        'x-new-article': NewArticle
+        'x-new-article': NewArticle,
     },
 });
 
