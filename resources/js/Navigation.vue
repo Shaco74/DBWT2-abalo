@@ -34,7 +34,7 @@ const navigation = ref([
     },
     {
         displayName: 'Verkaufen',
-        url: '/sell'
+        url: '/create'
     },
     {
         displayName: 'Unternehmen',
