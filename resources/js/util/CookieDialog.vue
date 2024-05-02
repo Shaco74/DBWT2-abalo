@@ -5,8 +5,8 @@
                 <!--  TODO: Füge sinnvollen Inhalt hier zu oder einen Link zu den Agreements -->
                 <!--  TODO: Diese Component muss auf jeder Seite laufen. Aktuell muss sie händisch hinzugefügt werden -->
                 <p>Our website uses cookies. Do you agree to the use of cookies?</p>
-                <button @click="agreeToCookies">Agree</button>
-                <button @click="disagreeToCookies">Disagree</button>
+                <button @click="agreeToCookies" type="button">Agree</button>
+                <button @click="disagreeToCookies" type="button">Disagree</button>
             </div>
         </div>
     </div>
@@ -23,7 +23,12 @@ export default {
     methods: {
         checkCookieAgreement() {
             const cookieAgreement = this.getCookie('cookieAgreement');
-            return cookieAgreement === "true";
+            if (cookieAgreement === 'true') {
+                return true;
+            }
+            if (cookieAgreement === 'false') {
+                return false;
+            }
         },
         agreeToCookies() {
             this.setCookie('cookieAgreement', 'true', 365);
@@ -47,8 +52,7 @@ export default {
         setCookie(name, value, days) {
             let expirationDate = new Date();
             expirationDate.setDate(expirationDate.getDate() + days);
-            let cookieValue = name + "=" + value + "; path=/; expires=" + expirationDate.toUTCString();
-            document.cookie = cookieValue;
+            document.cookie = name + "=" + value + "; path=/; expires=" + expirationDate.toUTCString() + ";" + "SameSite=lax;";
         }
     }
 };

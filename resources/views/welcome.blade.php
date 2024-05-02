@@ -14,7 +14,7 @@
 
     <!-- Custom Scripts -->
     @vite(['resources/js/app.js'])
-    
+
     <!-- Styles -->
     @vite('resources/css/app.css')
     <style>
@@ -22,6 +22,7 @@
     </style>
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+<h1 class="text-2xl flex justify-center">Home Page</h1>
 <header class="items-center gap-2 py-10 !bg-black flex flex-row-reverse w-full justify-between">
 
     @if (Route::has('login')  )
@@ -51,15 +52,16 @@
             @endif
         @endauth
     @endif
+
         <div id="app">
             @verbatim
-
-            <x-cookiedialog/>
+                <x-cookie-dialog>
+                </x-cookie-dialog>
+                <x-navigation>
+                </x-navigation>
             @endverbatim
         </div>
 
-
 </header>
-<h1 class="text-2xl">Home Page</h1>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SearchArticle;
 use Illuminate\Http\Request;
+use Util\TimeUtil;
 
 
 class ArticlesController extends Controller {
@@ -44,5 +45,20 @@ class ArticlesController extends Controller {
         return
             file_exists($jpgArticleImage) ? $jpgImagePath :
             (file_exists($pngArticleImage) ? $pngImagePath : '');
+    }
+
+    public function createArticle() {
+        return view('createArticle');
+    }
+
+    public function store(Request $request) {
+        $article = new SearchArticle();
+        $article->ab_name = $request->input('ab_name');
+        $article->ab_description = $request->input('ab_description');
+        $article->ab_price = $request->input('ab_price');
+        $article->ab_creator_id = 1;
+        $article->ab_createdate = now()->format('d.m.y H:i');
+        $article->save();
+        return redirect('/articles');
     }
 }

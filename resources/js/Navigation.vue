@@ -1,7 +1,7 @@
 <template>
     <section class="p-8">
-        <nav>
-            <ul class="flex-row flex gap-3 font-bold">
+        <nav class="flex justify-center">
+            <ul class="flex-row flex justify-center gap-3 font-bold">
                 <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)" @mouseleave="handleMouseLeave">
                     <a class="underline" :href="item.url">{{ item.displayName }}</a>
                     <Transition name="fade">
@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+
 import { ref } from 'vue';
 
 const navigation = ref([

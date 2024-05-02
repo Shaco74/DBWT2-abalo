@@ -6,7 +6,7 @@ const app = createApp({
     // Configuration options
     components: {
         'x-navigation': Navigation,
-        'x-cookiedialog': CookieDialog
+        'x-cookie-dialog': CookieDialog
     },
 });
 
