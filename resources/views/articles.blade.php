@@ -66,7 +66,7 @@
     </div>
 </div>
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     // Globale Warenkorb-Variable
     const cart = [];
@@ -74,6 +74,7 @@
     // Funktion zum Hinzufügen eines Artikels zum Warenkorb
     const addToCart = (article) => {
         if(cart.includes(article)) {
+            swal(`${article} bereits im Warenkorb`, "Du kannst ein Produkt nur einmal zum Warenkorb hinzufügen", "error")
             return;
         }
         console.log('Add to cart');
@@ -84,10 +85,27 @@
     // Funktion zum Entfernen eines Artikels aus dem Warenkorb
     const removeFromCart = (article) => {
         const index = cart.indexOf(article);
-        if (index !== -1) {
-            cart.splice(index, 1);
-            updateCart();
-        }
+
+        swal({
+            title: "Artikel löschen",
+            text: "Möchtest du den Artikel wirklich vom Warenkorb entfernen?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                    updateCart();
+                }
+                swal(`${article} wurde aus deinem Warenkorb entfernt`, {
+                    icon: "success",
+                });
+            } else {
+                swal(`${article} wurde nicht aus dem Warenkorb entfernt`);
+            }
+        });
     };
 
     // Funktion zum Erstellen eines HTML-Elements für einen Warenkorbartikel

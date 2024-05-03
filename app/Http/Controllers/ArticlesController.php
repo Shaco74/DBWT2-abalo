@@ -7,7 +7,9 @@ use App\Models\SearchArticle;
 use Illuminate\Http\Request;
 use Util\TimeUtil;
 
-
+/**
+ * Controller for the Article model.
+ */
 class ArticlesController extends Controller {
 
     /** Used to display searched Articles using URL query parameters. <br>
@@ -59,6 +61,7 @@ class ArticlesController extends Controller {
         $article->ab_creator_id = $request->input('ab_creator_id');
         $article->ab_createdate = now()->format('d.m.y H:i');
         $article->save();
+
         return redirect('/articles');
     }
 
