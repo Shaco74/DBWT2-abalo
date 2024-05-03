@@ -52,7 +52,6 @@ class ArticlesController extends Controller {
     }
 
     public function store(Request $request) {
-
         $article = new SearchArticle();
         $article->ab_name = $request->input('ab_name');
         $article->ab_description = $request->input('ab_description');

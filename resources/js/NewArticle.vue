@@ -1,6 +1,6 @@
 <template>
     <p>
-    <a id="btArticle" href="/articles">Back to Articles</a>
+        <a id="btArticle" href="/articles">Back to Articles</a>
     </p>
     <p id="GFG_DOWN"></p>
 </template>
@@ -17,17 +17,16 @@ cont.setAttribute("class", "bg-stone-200 h-auto w-1/2 p-4 mx-auto my-4 rounded-m
 // Create a form dynamically
 var form = document.createElement("form");
 form.setAttribute("method", "post");
-form.setAttribute("action", "/articles");
+form.setAttribute("action", "/articles/store");
 form.setAttribute("type", "submit");
 
-var input = document.createElement("input");
-input.setAttribute("type", "hidden");
-input.setAttribute("name", "_token");
-input.setAttribute("value", "ghjpL4WOYItNc1kCLDnSZG2gICpZStxinmbuVOEw");
-input.setAttribute("autoComplete", "off");
-form.appendChild(input);
-
-
+// add csrf token
+var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+var inputToken = document.createElement("input");
+inputToken.setAttribute("type", "hidden");
+inputToken.setAttribute("name", "_token");
+inputToken.setAttribute("value", csrfToken);
+form.appendChild(inputToken);
 
 var div = document.createElement("div");
 div.setAttribute("class", "form-group");
@@ -126,7 +125,6 @@ div.appendChild(li4);
 div.appendChild(s);
 
 
-
 document.getElementsByTagName("body")[0]
     .appendChild(cont);
 </script>
@@ -141,14 +139,14 @@ form {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-        width: 100%;
-        height: 30px;
-        margin-top: 5px;
-    }
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+}
 
-input, textarea{
-        text-indent: 10px;
-        font-size: small;
+input, textarea {
+    text-indent: 10px;
+    font-size: small;
 }
 
 @keyframes fadeIn {
@@ -163,30 +161,30 @@ input:focus, textarea:focus {
     animation: fadeIn 1s;
 }
 
-    input[type="submit"] {
-        width: 100%;
-        height: 35px;
-        background-color: green;
-        color: white;
-        border: none;
-    }
+input[type="submit"] {
+    width: 100%;
+    height: 35px;
+    background-color: green;
+    color: white;
+    border: none;
+}
 
-    input[type="submit"]:hover {
-        background-color: darkgreen;
-    }
+input[type="submit"]:hover {
+    background-color: darkgreen;
+}
 
-    textarea {
-        width: 100%;
-        margin-top: 5px;
-    }
+textarea {
+    width: 100%;
+    margin-top: 5px;
+}
 
-    label {
-        font-weight: bold;
-    }
+label {
+    font-weight: bold;
+}
 
-    .form-group {
-        margin-bottom: 10px;
-    }
+.form-group {
+    margin-bottom: 10px;
+}
 
 p {
     text-align: center;
