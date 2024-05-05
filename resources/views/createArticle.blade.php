@@ -18,6 +18,7 @@
             <h1 class="text-2xl flex justify-center">Create Article</h1>
             <div id="app">
                 @verbatim
+                    <x-cookie-dialog></x-cookie-dialog>
                     <x-navigation></x-navigation>
                     <x-new-article></x-new-article>
                 @endverbatim

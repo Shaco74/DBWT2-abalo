@@ -10,6 +10,7 @@
     @vite('resources/css/app.css')
     <div id="app">
         @verbatim
+            <x-cookie-dialog></x-cookie-dialog>
             <x-navigation></x-navigation>
         @endverbatim
     </div>

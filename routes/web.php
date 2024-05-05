@@ -16,4 +16,5 @@ Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'index'
 Route::get('/articles/{article}', [App\Http\Controllers\ArticlesController::class, 'show']);
 Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 'store']);
 Route::get('/create', [App\Http\Controllers\ArticlesController::class, 'createArticle']);
+Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
 
