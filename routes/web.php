@@ -15,6 +15,6 @@ Route::get('/playground', function () {return view('components.javascript-playgr
 Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'index']);
 Route::get('/articles/{article}', [App\Http\Controllers\ArticlesController::class, 'show']);
 Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 'store']);
-Route::get('/create', [App\Http\Controllers\ArticlesController::class, 'createArticle']);
+Route::get('/newarticle', [App\Http\Controllers\ArticlesController::class, 'createArticle']);
 Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
 

@@ -2,13 +2,16 @@
     <section class="p-8">
         <nav class="flex justify-center">
             <ul class="flex-row flex justify-center gap-3 font-bold">
-                <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)" @mouseleave="handleMouseLeave">
-                    <a class="underline" :href="item.url">{{ item.displayName }}</a>
+                <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)"
+                    @mouseleave="handleMouseLeave">
+                    <a class="underline" :class="{ 'text-gray-800': item.disabled }"
+                       :href="item.disabled ? null : item.url">{{ item.displayName }}</a>
                     <Transition name="fade">
                         <template v-if="showSubItems === item">
                             <ul class="item-with-subitems bg-slate-900 bg-opacity-25">
                                 <li class="subitem" v-for="subItem in item.subItems" :key="subItem.displayName">
-                                    <a :href="subItem.url">{{ subItem.displayName }}</a>
+                                    <a :class="{ 'text-gray-800': subItem.disabled }"
+                                       :href="subItem.disabled ? null : subItem.url">{{ subItem.displayName }}</a>
                                 </li>
                             </ul>
                         </template>
@@ -21,7 +24,7 @@
 
 <script setup>
 
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 const navigation = ref([
     {
@@ -30,22 +33,29 @@ const navigation = ref([
     },
     {
         displayName: 'Kategorien',
-        url: '/categories'
+        url: '/categories',
+        disabled: true,
+    },
+    {
+        displayName: 'Artikelliste',
+        url: '/articles'
     },
     {
         displayName: 'Verkaufen',
-        url: '/create'
+        url: '/newarticle'
     },
     {
         displayName: 'Unternehmen',
         subItems: [
             {
                 displayName: 'Philosophie',
-                url: '/philosophy'
+                url: '/philosophy',
+                disabled: true,
             },
             {
                 displayName: 'Karriere',
-                url: '/career'
+                url: '/career',
+                disabled: true,
             }
         ]
     }
@@ -56,6 +66,7 @@ const showSubItems = ref(null); // Track the currently hovered parent item
 function handleMouseLeave() {
     showSubItems.value = null;
 }
+
 function handleMouseOver(item) {
     showSubItems.value = item;
 }
@@ -66,7 +77,7 @@ ul {
     padding-left: 1rem;
 }
 
-.item-with-subitems{
+.item-with-subitems {
     position: absolute;
 }
 
@@ -86,5 +97,9 @@ ul {
 
 a:hover {
     color: white;
+}
+
+a:not([href]):hover {
+    color: #1f2937;
 }
 </style>
