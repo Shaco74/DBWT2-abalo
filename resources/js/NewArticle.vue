@@ -1,6 +1,6 @@
 <template>
     <p>
-        <a id="btArticle" href="/articles">Back to Articles</a>
+        <a id="btArticle" href="/articles">Zurück zur Artikelübersicht</a>
     </p>
     <p id="GFG_DOWN"></p>
 </template>
@@ -34,56 +34,57 @@ div.setAttribute("class", "form-group");
 
 var ANl = document.createElement("label");
 ANl.setAttribute("for", "ab_name");
-ANl.innerHTML = "Article name";
+ANl.innerHTML = "Artikel Name";
 
 var ANt = document.createElement("input");
 ANt.setAttribute("type", "text");
 ANt.setAttribute("name", "ab_name");
 ANt.setAttribute("id", "ab_name");
-ANt.setAttribute("placeholder", "Please enter the name of the article");
+ANt.setAttribute("placeholder", "Namen des Artikels");
 ANt.required = true;
 
 
 // Create an input element for date of birth
 var DESCl = document.createElement("label");
 DESCl.setAttribute("for", "ab_description");
-DESCl.innerHTML = "Article Description";
+DESCl.innerHTML = "Artikel Beschreibung";
 
 var DESCt = document.createElement("textarea");
 DESCt.setAttribute("name", "ab_description");
 DESCt.setAttribute("id", "ab_description");
-DESCt.setAttribute("placeholder", "Please enter the description of the article");
+DESCt.setAttribute("placeholder", "Beschreibung des Artikels");
 DESCt.setAttribute("rows", "4");
 DESCt.required = true;
 
 // Create an input element for emailID
 var PRl = document.createElement("label");
 PRl.setAttribute("for", "ab_price");
-PRl.innerHTML = "Price";
+PRl.innerHTML = "Preis";
 
 var PRt = document.createElement("input");
 PRt.setAttribute("type", "number");
+PRt.setAttribute("step", "0.01");
 PRt.setAttribute("name", "ab_price");
-PRt.setAttribute("placeholder", "Please enter the price of the article");
+PRt.setAttribute("placeholder", "Preis des Artikels");
 PRt.required = true;
 
 // Create an input element for password
 var CIDl = document.createElement("label");
 CIDl.setAttribute("for", "ab_creator_id");
-CIDl.innerHTML = "Creater-ID";
+CIDl.innerHTML = "Ersteller-ID";
 
 
 var CIDt = document.createElement("input");
 CIDt.setAttribute("type", "number");
 CIDt.setAttribute("name", "ab_creator_id");
 CIDt.setAttribute("id", "ab_creator_id");
-CIDt.setAttribute("placeholder", "Please enter the creator id of the article");
+CIDt.setAttribute("placeholder", "ID des Erstellers");
 
 // create a submit button
 var s = document.createElement("input");
 s.setAttribute("type", "submit");
-s.setAttribute("value", "Submit");
-s.innerHTML = "Create Article";
+s.setAttribute("value", "Erstellen");
+s.innerHTML = "Erstellen";
 
 cont.appendChild(form);
 form.appendChild(div);
@@ -147,6 +148,7 @@ input[type="email"] {
 input, textarea {
     text-indent: 10px;
     font-size: small;
+    width: 100%;
 }
 
 @keyframes fadeIn {
