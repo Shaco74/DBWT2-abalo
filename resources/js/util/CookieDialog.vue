@@ -8,8 +8,10 @@
                     Unsere Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern.
                     Wenn du fortfährst, stimmst du der Verwendung von Cookies zu.
                 </span>
-                <button @click="agreeToCookies" type="button">Zustimmen</button>
-                <button @click="disagreeToCookies" type="button">Ablehnen</button>
+                <div>
+                    <button @click="agreeToCookies" type="button">Zustimmen</button>
+                    <button @click="disagreeToCookies" type="button">Ablehnen</button>
+                </div>
             </div>
         </div>
     </div>
