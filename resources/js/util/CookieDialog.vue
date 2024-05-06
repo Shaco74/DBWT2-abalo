@@ -38,7 +38,6 @@ const agreeToCookies = () => {
 };
 
 const disagreeToCookies = () => {
-    setCookie('cookieAgreement', 'false', 365);
     // Redirect the user to /disagreecookies
     window.location.href = '/disagreecookies';
 };
