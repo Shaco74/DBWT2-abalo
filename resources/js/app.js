@@ -3,6 +3,7 @@ import Navigation from './Navigation.vue';
 import NewArticle from "./NewArticle.vue";
 import CookieDialog from './util/CookieDialog.vue'
 import CookieDisagree from "./CookieDisagree.vue";
+import ErrorMesssage from "./ErrorMesssage.vue";
 
 const app = createApp({
     // Configuration options
@@ -11,6 +12,7 @@ const app = createApp({
         'x-cookie-dialog': CookieDialog,
         'x-new-article': NewArticle,
         'x-cookie-disagree': CookieDisagree,
+        'x-error-message': ErrorMesssage,
     },
 });
 

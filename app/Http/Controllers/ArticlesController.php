@@ -54,6 +54,7 @@ class ArticlesController extends Controller {
     }
 
     public function store(Request $request) {
+    try {
         $article = new Article();
         $article->ab_name = $request->input('ab_name');
         $article->ab_description = $request->input('ab_description');
@@ -63,7 +64,11 @@ class ArticlesController extends Controller {
         $article->save();
 
         return redirect('/articles');
+    } catch (\Exception $e) {
+        $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
+        return view('components.error-message')->with('errorMessage', $errorMessage);
     }
+}
 
     public function deleteArticle($id) {
         $article = Article::find($id);
