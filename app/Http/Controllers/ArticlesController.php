@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SearchArticle;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Util\TimeUtil;
 
@@ -22,10 +22,10 @@ class ArticlesController extends Controller {
         $searchTerm = $request->input('search');
 
         // search for articles with the search term in the article name
-        $articles = SearchArticle::query()->where('ab_name', 'ilike', "%$searchTerm%")->get();
+        $articles = Article::query()->where('ab_name', 'ilike', "%$searchTerm%")->get();
 
         if ($articles->isEmpty()) {
-            $articles = SearchArticle::all();
+            $articles = Article::all();
         }
 
         // add image to each article
@@ -54,7 +54,7 @@ class ArticlesController extends Controller {
     }
 
     public function store(Request $request) {
-        $article = new SearchArticle();
+        $article = new Article();
         $article->ab_name = $request->input('ab_name');
         $article->ab_description = $request->input('ab_description');
         $article->ab_price = $request->input('ab_price');
@@ -66,7 +66,7 @@ class ArticlesController extends Controller {
     }
 
     public function deleteArticle($id) {
-        $article = SearchArticle::find($id);
+        $article = Article::find($id);
         $article->delete();
         return redirect('/articles');
     }
