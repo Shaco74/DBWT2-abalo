@@ -4,6 +4,7 @@ import NewArticle from "./NewArticle.vue";
 import CookieDialog from './util/CookieDialog.vue'
 import CookieDisagree from "./CookieDisagree.vue";
 import ErrorMesssage from "./ErrorMesssage.vue";
+import Message from "./MessageComponent.vue";
 
 const app = createApp({
     // Configuration options
@@ -13,6 +14,7 @@ const app = createApp({
         'x-new-article': NewArticle,
         'x-cookie-disagree': CookieDisagree,
         'x-error-message': ErrorMesssage,
+        'x-message': Message,
     },
 });
 

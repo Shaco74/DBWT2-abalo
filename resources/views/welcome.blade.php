@@ -22,9 +22,12 @@
     </style>
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-<h1 class="text-2xl flex justify-center">Home Page</h1>
-<header class="items-center gap-2 py-10 !bg-black flex flex-row-reverse w-full justify-between">
-
+<div id="app" class="pt-4 bg-zinc-950">
+    <!-- P3:  Aufgabe 1-->
+    @verbatim
+        <x-message></x-message>
+    @endverbatim
+    <header class="items-center gap-2 py-5 flex flex-row-reverse w-full justify-around">
     @if (Route::has('login')  )
 
         @auth
@@ -53,15 +56,14 @@
         @endauth
     @endif
 
-        <div id="app">
             @verbatim
                 <x-cookie-dialog>
                 </x-cookie-dialog>
                 <x-navigation>
                 </x-navigation>
             @endverbatim
-        </div>
 
 </header>
+</div>
 </body>
 </html>

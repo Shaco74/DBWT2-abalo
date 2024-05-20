@@ -49,9 +49,6 @@ class ArticlesController extends Controller {
             (file_exists($pngArticleImage) ? $pngImagePath : '');
     }
 
-    public function createArticle() {
-        return view('createArticle');
-    }
 
     public function store(Request $request) {
     try {
