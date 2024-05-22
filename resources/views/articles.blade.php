@@ -18,8 +18,9 @@
         <div class="basis-1/4"></div>
         <div class="basis-1/2">
             <div>
+
             <form action="{{ url('/articles') }}" method="get">
-                <input type="text" id="search" name="search" value="{{ request()->input('search') }}" class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline" placeholder="Search">
+                <input type="text" id="search" name="search" value="{{ request()->input('search') }}" class="peer bg-transparent text-blue-gray-700 font-sans font-normal outline" placeholder="Search">
             </form>
             </div>
                <div class="flex justify-center">

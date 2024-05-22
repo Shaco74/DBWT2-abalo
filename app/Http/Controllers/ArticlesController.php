@@ -67,9 +67,4 @@ class ArticlesController extends Controller {
     }
 }
 
-    public function deleteArticle($id) {
-        $article = Article::find($id);
-        $article->delete();
-        return redirect('/articles');
-    }
 }
