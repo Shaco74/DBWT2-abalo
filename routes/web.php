@@ -24,3 +24,5 @@ Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 
 
 //Cookie handling
 Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
+Route::get('/api/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
+Route::post('/api/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);

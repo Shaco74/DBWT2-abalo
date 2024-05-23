@@ -12,6 +12,7 @@
         @verbatim
             <x-cookie-dialog></x-cookie-dialog>
             <x-navigation></x-navigation>
+            <x-search></x-search>
         @endverbatim
     </div>
     <div class="flex">

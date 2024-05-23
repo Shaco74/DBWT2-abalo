@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Util\TimeUtil;
 
 /**
@@ -52,6 +54,7 @@ class ArticlesController extends Controller {
 
     public function store(Request $request) {
     try {
+
         $article = new Article();
         $article->ab_name = $request->input('ab_name');
         $article->ab_description = $request->input('ab_description');
@@ -60,11 +63,46 @@ class ArticlesController extends Controller {
         $article->ab_createdate = now()->format('d.m.y H:i');
         $article->save();
 
-        return redirect('/articles');
-    } catch (\Exception $e) {
+        return (response()->json(['id' => $article->id], 201) && redirect('/articles'));
+    } catch (Exception $e) {
         $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
         return view('components.error-message')->with('errorMessage', $errorMessage);
     }
 }
 
+    public function search_api(Request $request) {
+        $searchTerm = $request->query('search');
+        if ($searchTerm === null) {
+            return response()->json(['articles' => []]);
+        }
+        $articles = Article::query()->where('ab_name', 'ilike', "%$searchTerm%")->get();
+        return response()->json(['articles' => $articles]);
+    }
+
+    public function store_api(Request $request) {
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'ab_name' => 'required',
+                'ab_price' => 'required | numeric | min:1',
+                'ab_creator_id' => 'required',
+            ]);
+
+
+
+            $article = new Article();
+            $article->ab_name = $request->input('ab_name');
+            $article->ab_description = $request->input('ab_description');
+            $article->ab_price = $request->input('ab_price');
+            $article->ab_creator_id = $request->input('ab_creator_id');
+            $article->ab_createdate = now()->format('d.m.y H:i');
+            $article->save();
+
+            return response()->json(['id' => $article->id],201);
+
+        } catch (Exception $e) {
+            $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
+            return view('components.error-message')->with('errorMessage', $errorMessage);
+        }
+    }
 }
