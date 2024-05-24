@@ -90,6 +90,10 @@ class ArticlesController extends Controller {
 
 
 
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 400);
+            }
+
             $article = new Article();
             $article->ab_name = $request->input('ab_name');
             $article->ab_description = $request->input('ab_description');
@@ -101,8 +105,7 @@ class ArticlesController extends Controller {
             return response()->json(['id' => $article->id],201);
 
         } catch (Exception $e) {
-            $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
-            return view('components.error-message')->with('errorMessage', $errorMessage);
+            return response()->json(['error' => 'An error occurred while creating the article: ' . $e->getMessage()], 500);
         }
     }
 }

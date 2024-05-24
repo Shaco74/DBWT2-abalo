@@ -43,10 +43,6 @@ const article = ref({
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const isSubmitting = ref(false);
 
-/*
-* P3: Task 2
-* 3h
-* */
 const sendArticle = () => {
     if (isSubmitting.value) return;
 
@@ -58,7 +54,7 @@ const sendArticle = () => {
     formData.append('ab_creator_id', article.value.ab_creator_id);
     formData.append('_token', csrfToken);
 
-    //
+    //P5 Task 8
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/articles/store', true);
     xhr.onreadystatechange = function () {
