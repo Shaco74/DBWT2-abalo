@@ -21,6 +21,7 @@
                     <x-cookie-dialog></x-cookie-dialog>
                     <x-navigation></x-navigation>
                     <x-new-article></x-new-article>
+                    <x-create-api></x-create-api>
                 @endverbatim
             </div>
         </div>
