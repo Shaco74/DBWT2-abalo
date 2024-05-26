@@ -29,3 +29,8 @@ Route::get('/disagreecookies', function () {return view('components.disagree-coo
 //API
 Route::get('/api/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
 Route::post('/api/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);
+
+//Shopping cart
+Route::post('/cart/add', [App\Http\Controllers\ShoppingCartController::class, 'add']);
+Route::delete('/cart/remove', [App\Http\Controllers\ShoppingCartController::class, 'remove']);
+Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 'show']);

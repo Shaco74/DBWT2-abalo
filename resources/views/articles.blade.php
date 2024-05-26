@@ -2,6 +2,10 @@
 @php
     use App\Helpers\ImageHelper;
 @endphp
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Article View</title>
+</head>
 <body class="bg-black overflow-hidden h-screen">
 
 <div class="font-sans antialiased dark:bg-black dark:text-white/50 font p-4 flex flex-col h-full">
@@ -56,16 +60,7 @@
             <div class="mb-4 pl-4">
                 <h2>Warenkorb</h2>
                 <div class="overflow-y-auto h-64">
-                    <table class="cart-list text-red-50 w-full border border-gray-400">
-                        <thead>
-                        <tr>
-                            <th>Artikel</th>
-                            <th>Remove</th>
-                        </tr>
-                        </thead>
-                        <tbody id="cart-body">
-                        </tbody>
-                    </table>
+                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/cart/show">Show Cart</a>
                 </div>
             </div>
         </div>
@@ -74,42 +69,49 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    // Globale Warenkorb-Variable
-    const cart = [];
-
     // Funktion zum Hinzufügen eines Artikels zum Warenkorb
     const addToCart = (article) => {
-        if(cart.some(item => item.id === article.id)) {
-            swal(`${article.ab_name} bereits im Warenkorb`, "Du kannst ein Produkt nur einmal zum Warenkorb hinzufügen", "error");
-            return;
-        }
-        console.log('Add to cart');
-        cart.push(article);
-        updateCart();
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                articleId: article.id,
+                quantity: 1
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    swal(`${article.ab_name} wurde zum Warenkorb hinzugefügt`, "", "success");
+                    updateCart();
+                } else {
+                    swal('Fehler', 'Beim Hinzufügen des Artikels zum Warenkorb ist ein Fehler aufgetreten.', 'error');
+                }
+            });
     };
 
     // Funktion zum Entfernen eines Artikels aus dem Warenkorb
     const removeFromCart = (articleId) => {
-        const index = cart.findIndex(item => item.id === articleId);
-
-        swal({
-            title: "Artikel löschen",
-            text: "Möchtest du den Artikel wirklich vom Warenkorb entfernen?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+        fetch('/cart/remove', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                articleId: articleId
+            })
         })
-            .then((willDelete) => {
-                if (willDelete) {
-                    if (index !== -1) {
-                        cart.splice(index, 1);
-                        updateCart();
-                    }
-                    swal(`Artikel wurde aus deinem Warenkorb entfernt`, {
-                        icon: "success",
-                    });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    swal('Artikel wurde aus deinem Warenkorb entfernt', '', 'success');
+                    updateCart();
                 } else {
-                    swal(`Artikel wurde nicht aus dem Warenkorb entfernt`);
+                    swal('Fehler', 'Beim Entfernen des Artikels aus dem Warenkorb ist ein Fehler aufgetreten.', 'error');
                 }
             });
     };
@@ -117,30 +119,39 @@
     // Funktion zum Erstellen eines HTML-Elements für einen Warenkorbartikel
     const createCartItemElement = (article) => {
         return `
-            <tr class="border border-gray-400">
-                <td class="p-2 text-white">${article.ab_name}
-                    <p>${article.ab_price}</p></td>
-                <td class="text-white">
-                    <button class="m-4 text-white" onclick="removeFromCart(${article.id})">-</button>
-                </td>
-            </tr>
-        `;
+        <tr class="border border-gray-400">
+            <td class="p-2 text-white">${article.ab_name}</td>
+            <td class="text-white">
+                <button class="m-4 text-white" onclick="removeFromCart(${article.id})">-</button>
+            </td>
+        </tr>
+    `;
     };
 
     // Funktion zum Aktualisieren des Warenkorbs
     const updateCart = () => {
-        const cartBody = document.getElementById('cart-body');
-        cartBody.innerHTML = '';
+        fetch('/cart/show', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const cartBody = document.getElementById('cart-body');
+                cartBody.innerHTML = '';
 
-        cart.forEach((article) => {
-            cartBody.innerHTML += createCartItemElement(article);
-        });
+                data.articles.forEach((article) => {
+                    cartBody.innerHTML += createCartItemElement(article);
+                });
+            });
     };
 
-    // Globale Warenkorb-Variable an das Fensterobjekt anhängen
-    window.cart = cart;
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
+    // Bei Seitenaufruf den Warenkorb initialisieren
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCart();
+    });
+
 </script>
 <style>
     /* Benutzerdefinierte Scrollleistenstile */

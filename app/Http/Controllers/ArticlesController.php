@@ -34,7 +34,7 @@ class ArticlesController extends Controller {
         foreach ($articles as $article) {
             $article->image = $this->getArticleImage($article);
         }
-        //echo($articles);
+        redirect('/cart/show');
         return view('articles', ['articles' => $articles]);
     }
 
@@ -55,13 +55,7 @@ class ArticlesController extends Controller {
     public function store(Request $request) {
     try {
 
-        $article = new Article();
-        $article->ab_name = $request->input('ab_name');
-        $article->ab_description = $request->input('ab_description');
-        $article->ab_price = $request->input('ab_price');
-        $article->ab_creator_id = $request->input('ab_creator_id');
-        $article->ab_createdate = now()->format('d.m.y H:i');
-        $article->save();
+        $article = $this->getArticle($request);
 
         return (response()->json(['id' => $article->id], 201) && redirect('/articles'));
     } catch (Exception $e) {
@@ -92,18 +86,27 @@ class ArticlesController extends Controller {
                 return response()->json(['error' => $validator->errors()], 400);
             }
 
-            $article = new Article();
-            $article->ab_name = $request->input('ab_name');
-            $article->ab_description = $request->input('ab_description');
-            $article->ab_price = $request->input('ab_price');
-            $article->ab_creator_id = $request->input('ab_creator_id');
-            $article->ab_createdate = now()->format('d.m.y H:i');
-            $article->save();
+            $article = $this->getArticle($request);
 
             return response()->json(['id' => $article->id],201);
 
         } catch (Exception $e) {
             return response()->json(['error' => 'An error occurred while creating the article: ' . $e->getMessage()], 500);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return Article
+     */
+    public function getArticle(Request $request): Article {
+        $article = new Article();
+        $article->ab_name = $request->input('ab_name');
+        $article->ab_description = $request->input('ab_description');
+        $article->ab_price = $request->input('ab_price');
+        $article->ab_creator_id = $request->input('ab_creator_id');
+        $article->ab_createdate = now()->format('d.m.y H:i');
+        $article->save();
+        return $article;
     }
 }
