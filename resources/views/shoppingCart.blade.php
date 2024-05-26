@@ -20,16 +20,15 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($articlesCart as $cart)
+        @foreach ($articlesCart as $article)
             <tr class="border-b border-gray-600">
-                <td class="py-2 px-4">{{ $cart->id }}</td>
-                <td class="py-2 px-4">{{ $cart->ab_name }}</td>
-                <td class="py-2 px-4">{{ $cart->ab_description }}</td>
+                <td class="py-2 px-4">{{ $article->id }}</td>
+                <td class="py-2 px-4">{{ $article->ab_name }}</td>
+                <td class="py-2 px-4">{{ $article->ab_description }}</td>
                 <td class="py-2 px-4">
-                    <form action="{{ url('/cart/remove') }}" method="POST">
+                    <form action="{{ url('/api/shoppingcart/remove') }}" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="articleId" value="{{ $cart->id }}">
+                        <input type="hidden" name="articleId" value="{{ $article->id }}">
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Remove</button>
                     </form>
                 </td>

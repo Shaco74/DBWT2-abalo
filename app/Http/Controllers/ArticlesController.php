@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Shoppingcart;
+use App\Models\ShoppingcartItem;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +39,8 @@ class ArticlesController extends Controller {
         redirect('/cart/show');
         return view('articles', ['articles' => $articles]);
     }
+
+
 
     private function getArticleImage($article) {
         $articleId = $article->id;

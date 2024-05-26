@@ -26,7 +26,9 @@
         <div class="basis-1/2 flex flex-col overflow-hidden">
             <div class="p-4">
                 <form action="{{ url('/articles') }}" method="get">
-                    <input type="text" id="search" name="search" value="{{ request()->input('search') }}" class="peer bg-transparent text-blue-gray-700 font-sans font-normal outline" placeholder="Search">
+                    <input type="text" id="search" name="search" value="{{ request()->input('search') }}"
+                           class="peer bg-transparent text-blue-gray-700 font-sans font-normal outline"
+                           placeholder="Search">
                 </form>
             </div>
             <div class="flex justify-center overflow-scroll h-96 overflow-x-hidden rounded">
@@ -60,7 +62,8 @@
             <div class="mb-4 pl-4">
                 <h2>Warenkorb</h2>
                 <div class="overflow-y-auto h-64">
-                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/cart/show">Show Cart</a>
+                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/cart/show">Show
+                        Cart</a>
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
 <script>
     // Funktion zum Hinzufügen eines Artikels zum Warenkorb
     const addToCart = (article) => {
-        fetch('/cart/add', {
+        fetch('/api/shoppingcart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,16 +82,15 @@
             },
             body: JSON.stringify({
                 articleId: article.id,
-                quantity: 1
             })
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    swal(`${article.ab_name} wurde zum Warenkorb hinzugefügt`, "", "success");
-                    updateCart();
+                if (data.error) {
+                    swal('Fehler', 'Beim Hinzufügen des Artikels zum Warenkorb ist ein Fehler aufgetreten. Der Artikel ist wohlmöglich bereits im Warenkorb', 'error');
                 } else {
-                    swal('Fehler', 'Beim Hinzufügen des Artikels zum Warenkorb ist ein Fehler aufgetreten.', 'error');
+                    swal(`${article.ab_name} wurde zum Warenkorb hinzugefügt`, "", "success");
+                    //updateCart();
                 }
             });
     };
@@ -148,7 +150,7 @@
     };
 
     // Bei Seitenaufruf den Warenkorb initialisieren
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         updateCart();
     });
 
