@@ -10,7 +10,7 @@
     <!-- Styles -->
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-black">
 
 <div class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex justify-center p-8 w-full">

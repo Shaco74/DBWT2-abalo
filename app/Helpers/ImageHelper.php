@@ -17,7 +17,7 @@ class ImageHelper {
      */
     public static function renderImageIfPresent($image): string {
         if ($image) {
-            return '<img width="300px" src="' . $image . '" alt="Ein Bild des Produktes"/>';
+            return '<img width="200px" src="' . $image . '" alt="Ein Bild des Produktes"/>';
         }
         return '<p>Kein Bild vorhanden :(</p>';
     }

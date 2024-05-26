@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/csrf', function () {return csrf_token();});
 
 //Welcome page
 Route::get('/', function () {return view('welcome');});
@@ -24,5 +25,7 @@ Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 
 
 //Cookie handling
 Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
+
+//API
 Route::get('/api/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
 Route::post('/api/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);

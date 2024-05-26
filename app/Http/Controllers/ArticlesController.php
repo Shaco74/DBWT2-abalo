@@ -79,16 +79,14 @@ class ArticlesController extends Controller {
         return response()->json(['articles' => $articles]);
     }
 
-    public function store_api(Request $request) {
-        try {
+    public function store_api(Request $request){
 
+        try {
             $validator = Validator::make($request->all(), [
                 'ab_name' => 'required',
                 'ab_price' => 'required | numeric | min:1',
                 'ab_creator_id' => 'required',
             ]);
-
-
 
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors()], 400);
