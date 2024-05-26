@@ -5,8 +5,6 @@ import CookieDialog from './util/CookieDialog.vue'
 import CookieDisagree from "./CookieDisagree.vue";
 import ErrorMesssage from "./ErrorMesssage.vue";
 import Message from "./MessageComponent.vue";
-import Search_Api from "./SearchArticle.vue";
-import Create_Api from "./ApiNewArticle.vue";
 
 const app = createApp({
     // Configuration options
@@ -17,8 +15,6 @@ const app = createApp({
         'x-cookie-disagree': CookieDisagree,
         'x-error-message': ErrorMesssage,
         'x-message': Message,
-        'x-search': Search_Api,
-        'x-create-api': Create_Api,
     },
 });
 

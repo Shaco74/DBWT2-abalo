@@ -2,7 +2,10 @@
 @php
     use App\Helpers\ImageHelper;
 @endphp
-<div class="font-sans antialiased dark:bg-black dark:text-white/50 font">
+<body class="bg-black overflow-hidden">
+
+
+<div class="font-sans antialiased dark:bg-black dark:text-white/50 font p-4">
     <!-- Custom Scripts -->
     @vite(['resources/js/app.js'])
 
@@ -24,13 +27,12 @@
                 <input type="text" id="search" name="search" value="{{ request()->input('search') }}" class="peer bg-transparent text-blue-gray-700 font-sans font-normal outline" placeholder="Search">
             </form>
             </div>
-               <div class="flex justify-center">
+               <div class="flex justify-center overflow-scroll h-96 overflow-x-hidden mt-40">
                 <table style="border-collapse: collapse " class="text-red-100 bg-stone-600">
                     <thead class="bg-stone-800 text-red-200">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Description</th>
                         <th>Article Image</th>
                         <th>Action</th>
                     </tr>
@@ -39,8 +41,9 @@
                     @foreach($articles as $article)
                         <tr style="border: 2px solid #9ca3af;">
                             <td>{{ $article->id }}</td>
-                            <td>{{ $article->ab_name }}</td>
-                            <td>{{ $article->description }}</td>
+                            <td>{{ $article->ab_name }}
+                                <p>{{ $article->ab_description }}</p>
+                            </td>
                             <td>{!! ImageHelper::renderImageIfPresent($article->image) !!}</td>
                             <td class="bg-stone-800">
                                 <button onclick="addToCart('{{ $article->ab_name }}')" class="w-full">+</button>
@@ -52,9 +55,9 @@
         </div>
         </div>
         <div class="basis-1/4">
-            <div class="mb-4">
+            <div class="mb-4 pl-4">
                 <h2>Warenkorb</h2>
-                <table class="cart-list">
+                <table class="cart-list text-red-50">
                     <thead>
                     <tr>
                         <th>Artikel</th>
@@ -76,6 +79,7 @@
 
     // Funktion zum Hinzufügen eines Artikels zum Warenkorb
     const addToCart = (article) => {
+        console.log(article);
         if(cart.includes(article)) {
             swal(`${article} bereits im Warenkorb`, "Du kannst ein Produkt nur einmal zum Warenkorb hinzufügen", "error")
             return;
@@ -87,6 +91,7 @@
 
     // Funktion zum Entfernen eines Artikels aus dem Warenkorb
     const removeFromCart = (article) => {
+
         const index = cart.indexOf(article);
 
         swal({
@@ -96,19 +101,19 @@
             buttons: true,
             dangerMode: true,
         })
-        .then((willDelete) => {
-            if (willDelete) {
-                if (index !== -1) {
-                    cart.splice(index, 1);
-                    updateCart();
+            .then((willDelete) => {
+                if (willDelete) {
+                    if (index !== -1) {
+                        cart.splice(index, 1);
+                        updateCart();
+                    }
+                    swal(`${article} wurde aus deinem Warenkorb entfernt`, {
+                        icon: "success",
+                    });
+                } else {
+                    swal(`${article} wurde nicht aus dem Warenkorb entfernt`);
                 }
-                swal(`${article} wurde aus deinem Warenkorb entfernt`, {
-                    icon: "success",
-                });
-            } else {
-                swal(`${article} wurde nicht aus dem Warenkorb entfernt`);
-            }
-        });
+            });
     };
 
     // Funktion zum Erstellen eines HTML-Elements für einen Warenkorbartikel
@@ -138,3 +143,4 @@
     window.addToCart = addToCart;
     window.removeFromCart = removeFromCart;
 </script>
+</body>
