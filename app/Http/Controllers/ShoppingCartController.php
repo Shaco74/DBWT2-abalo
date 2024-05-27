@@ -12,6 +12,16 @@ use Illuminate\Http\Request;
 /**
  * Controller for the Article model.
  */
+/**
+ * Class ShoppingCartController <br>
+ * Controlling the shopping cart
+ *
+ * Functions: <br>
+ * addArticleToCart(Request $request) <br>
+ * getShoppingCart(Request $request) <br>
+ * getItemIdsFromCart(Request $request) <br>
+ * removeArticleFromCart(Request $request) <br>
+*/
 class ShoppingCartController extends Controller {
    public function addArticleToCart(Request $request) {
     try {
@@ -126,8 +136,8 @@ class ShoppingCartController extends Controller {
 
             // Lösche das Item aus der Datenbank
             $shoppingCartItem->delete();
-
-            return response()->json(['message' => 'Item removed from shopping cart'], 200);
+            return redirect('/cart/show');
+            //return response()->json(['message' => 'Item removed from shopping cart'], 200);
 
         } catch (Exception $e) {
             $errorMessage = 'An error occurred while removing the article from the cart: ' . $e->getMessage();
@@ -153,7 +163,7 @@ class ShoppingCartController extends Controller {
         $cart = $request->session()->get('cart', []);
         unset($cart[$articleId]);
         $request->session()->put('cart', $cart);
-        return redirect('/cart/show');
+        return redirect('/api/shoppingcart');
 
     }
 

@@ -10,6 +10,10 @@
 </template>
 
 <script>
+/*
+* P3:  Task 1
+* Create a Vue component that fetches a JSON file from the server and displays the content in the browser.
+* */
 export default {
     data() {
         return {

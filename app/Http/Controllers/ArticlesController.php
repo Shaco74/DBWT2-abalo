@@ -68,15 +68,29 @@ class ArticlesController extends Controller {
     }
 }
 
+/**
+ * P3: Task 7
+ * Create an API endpoint that allows you to search for articles by name.
+ * */
     public function search_api(Request $request) {
         $searchTerm = $request->query('search');
         if ($searchTerm === null) {
             return response()->json(['articles' => []]);
         }
-        $articles = Article::query()->where('ab_name', 'ilike', "%$searchTerm%")->get();
+        // search for articles with the search term in the article name or description or price
+$articles = Article::query()
+            ->where('ab_name', 'ilike', "%$searchTerm%")
+            ->orWhere('ab_description', 'ilike', "%$searchTerm%")
+            ->orWhere('ab_price', 'ilike', "%$searchTerm%")
+            ->get();
+
         return response()->json(['articles' => $articles]);
     }
 
+    /**
+     * P3: Task 8
+     * Create an API endpoint that allows you to create an article.
+     * */
     public function store_api(Request $request){
 
         try {

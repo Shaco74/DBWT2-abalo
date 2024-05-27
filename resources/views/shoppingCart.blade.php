@@ -10,6 +10,7 @@
 <body class="bg-black text-white">
 <div class="container mx-auto mt-10">
     <h1 class="text-3xl mb-4">Warenkorb</h1>
+    <a href="http://127.0.0.1:8020/articles">Back to Articles</a>
     <table class="min-w-full bg-gray-800 rounded-lg">
         <thead>
         <tr>
