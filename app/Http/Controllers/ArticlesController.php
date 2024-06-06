@@ -36,7 +36,7 @@ class ArticlesController extends Controller {
         foreach ($articles as $article) {
             $article->image = $this->getArticleImage($article);
         }
-        redirect('/cart/show');
+        redirect('/api/cart/show');
         return view('articles', ['articles' => $articles]);
     }
 

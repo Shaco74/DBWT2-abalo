@@ -1,27 +1,48 @@
 <!-- P3:  Aufgabe 1-->
-<template>
-    <div>
+<template xmlns="http://www.w3.org/1999/html">
+    <div class="grid">
         <div id="title" class="text-center text-2xl"></div>
         <div class="flex justify-center ">
             <div id="message" class="text-center text-xl mt-4 bg-zinc-900 rounded px-1"></div>
         </div>
-
+        <div class="flex">
+        <div class="basis-1/4"></div>
+        <div class="flex justify-center basis-1/2">
+            <p class="mt-8 p-1 dotted border-t-2 border-l-2 border-current w-1/2"> <button @click="countUp">Count up</button> {{ count }}</p>
+            <p class="mt-8 p-1 pl-2 dotted border-b-2 border-r-2 border-current w-1/2"><button @click="addRandom">Random Number</button>  {{ random }} </p>
+        </div>
+        <div class="basis-1/4"></div>
+    </div>
     </div>
 </template>
 
 <script>
+import {add, random} from "mathjs";
+//using math js to do something cool
+
+
 /*
 * P3:  Task 1
 * Create a Vue component that fetches a JSON file from the server and displays the content in the browser.
 * */
 export default {
+    methods: {
+        countUp() {
+            this.count = add(this.count, 1);
+        },
+        addRandom() {
+            this.random = random(0, 100);
+        }
+    },
     data() {
         return {
             title: '',
             message: '',
             message2: '',
             message3: '',
-            selectedMessage: ''
+            selectedMessage: '',
+            count: 0,
+            random: 0
         };
     },
     created() {

@@ -136,7 +136,7 @@ class ShoppingCartController extends Controller {
 
             // Lösche das Item aus der Datenbank
             $shoppingCartItem->delete();
-            return redirect('/cart/show');
+            return redirect('/api/cart/show');
             //return response()->json(['message' => 'Item removed from shopping cart'], 200);
 
         } catch (Exception $e) {
