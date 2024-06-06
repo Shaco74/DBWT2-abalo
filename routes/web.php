@@ -26,17 +26,4 @@ Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 
 //Cookie handling
 Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
 
-//API
-Route::get('/api/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
-Route::post('/api/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);
 
-Route::post('/api/shoppingcart', [App\Http\Controllers\ShoppingCartController::class, 'addArticleToCart']);
-Route::post('/api/shoppingcart/remove', [App\Http\Controllers\ShoppingCartController::class, 'removeArticleFromCart']);
-Route::get('/api/shoppingcart', [App\Http\Controllers\ShoppingCartController::class, 'getShoppingCart']);
-Route::get('/api/shoppingcart/items/ids', [App\Http\Controllers\ShoppingCartController::class, 'getItemIdsFromCart']);
-
-
-//Shopping cart
-Route::post('/cart/add', [App\Http\Controllers\ShoppingCartController::class, 'add']);
-Route::delete('/cart/remove', [App\Http\Controllers\ShoppingCartController::class, 'remove']);
-Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 'showCart']);
