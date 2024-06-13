@@ -4,12 +4,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Shoppingcart;
 use App\Models\ShoppingcartItem;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Util\TimeUtil;
 
 /**
  * Controller for the Article model.
@@ -41,7 +39,6 @@ class ArticlesController extends Controller {
     }
 
 
-
     private function getArticleImage($article) {
         $articleId = $article->id;
 
@@ -52,64 +49,19 @@ class ArticlesController extends Controller {
 
         return
             file_exists($jpgArticleImage) ? $jpgImagePath :
-            (file_exists($pngArticleImage) ? $pngImagePath : '');
+                (file_exists($pngArticleImage) ? $pngImagePath : '');
     }
 
 
     public function store(Request $request) {
-    try {
-
-        $article = $this->getArticle($request);
-
-        return (response()->json(['id' => $article->id], 201) && redirect('/articles'));
-    } catch (Exception $e) {
-        $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
-        return view('components.error-message')->with('errorMessage', $errorMessage);
-    }
-}
-
-/**
- * P3: Task 7
- * Create an API endpoint that allows you to search for articles by name.
- * */
-    public function search_api(Request $request) {
-        $searchTerm = $request->query('search');
-        if ($searchTerm === null) {
-            return response()->json(['articles' => []]);
-        }
-        // search for articles with the search term in the article name or description or price
-$articles = Article::query()
-            ->where('ab_name', 'ilike', "%$searchTerm%")
-            ->orWhere('ab_description', 'ilike', "%$searchTerm%")
-            ->orWhere('ab_price', 'ilike', "%$searchTerm%")
-            ->get();
-
-        return response()->json(['articles' => $articles]);
-    }
-
-    /**
-     * P3: Task 8
-     * Create an API endpoint that allows you to create an article.
-     * */
-    public function store_api(Request $request){
-
         try {
-            $validator = Validator::make($request->all(), [
-                'ab_name' => 'required',
-                'ab_price' => 'required | numeric | min:1',
-                'ab_creator_id' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 400);
-            }
 
             $article = $this->getArticle($request);
 
-            return response()->json(['id' => $article->id],201);
-
+            return (response()->json(['id' => $article->id], 201) && redirect('/articles'));
         } catch (Exception $e) {
-            return response()->json(['error' => 'An error occurred while creating the article: ' . $e->getMessage()], 500);
+            $errorMessage = 'An error occurred while creating the article: ' . $e->getMessage();
+            return view('components.error-message')->with('errorMessage', $errorMessage);
         }
     }
 
@@ -126,5 +78,59 @@ $articles = Article::query()
         $article->ab_createdate = now()->format('d.m.y H:i');
         $article->save();
         return $article;
+    }
+
+    /**
+     * P3: Task 7
+     * Create an API endpoint that allows you to search for articles by name.
+     * */
+    public function search_api(Request $request) {
+        $searchTerm = $request->query('search');
+        if ($searchTerm === null) {
+            $articles = Article::all();
+            foreach ($articles as $article) {
+                $article->image = $this->getArticleImage($article);
+                $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
+            }
+            return response()->json(['articles' => $articles]);
+        }
+        // search for articles with the search term in the article name or description or price
+        $articles = Article::query()
+            ->where('ab_name', 'ilike', "%$searchTerm%")
+            ->orWhere('ab_description', 'ilike', "%$searchTerm%")
+            ->orWhere('ab_price', 'ilike', "%$searchTerm%")
+            ->get();
+
+        foreach ($articles as $article) {
+            $article->image = $this->getArticleImage($article);
+            $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
+        }
+        return response()->json(['articles' => $articles]);
+    }
+
+    /**
+     * P3: Task 8
+     * Create an API endpoint that allows you to create an article.
+     * */
+    public function store_api(Request $request) {
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'ab_name' => 'required',
+                'ab_price' => 'required | numeric | min:1',
+                'ab_creator_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 400);
+            }
+
+            $article = $this->getArticle($request);
+
+            return response()->json(['id' => $article->id], 201);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the article: ' . $e->getMessage()], 500);
+        }
     }
 }
