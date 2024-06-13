@@ -145,4 +145,24 @@ table {
         }
     }
 }
+
+/* Benutzerdefinierte Scrollleistenstile */
+::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Hintergrundfarbe der Scrollleiste */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4f4f4f; /* Farbe des Scrollbalkens */
+    border-radius: 6px; /* Abrundungsradius */
+    border: 3px solid transparent; /* Rand der Scrollbalken */
+    background-clip: content-box; /* Hintergrundclip */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Farbe des Scrollbalkens beim Hovern */
+}
 </style>
