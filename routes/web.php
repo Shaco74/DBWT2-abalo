@@ -27,3 +27,5 @@ Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 
 Route::get('/disagreecookies', function () {return view('components.disagree-cookie');});
 
 
+//Shopping cart
+Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 'showCart']);

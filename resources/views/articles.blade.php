@@ -61,7 +61,7 @@
         <div class="basis-1/4">
             <div class="mb-4 pl-4">
                 <div class="overflow-y-auto h-64">
-                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/api/cart/show">Warenkorb anzeigen</a>
+                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/cart/show">Warenkorb anzeigen</a>
                 </div>
             </div>
         </div>

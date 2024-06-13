@@ -20,4 +20,3 @@ Route::get('/shoppingcart', [App\Http\Controllers\ShoppingCartController::class,
 //Shopping cart
 Route::post('/cart/add', [App\Http\Controllers\ShoppingCartController::class, 'add']);
 Route::delete('/cart/remove', [App\Http\Controllers\ShoppingCartController::class, 'remove']);
-Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 'showCart']);
