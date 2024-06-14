@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use SplFileObject;
 
+//P4 T5: Seeder for article_has_articlecategory
 class DevelopmentData_Categories extends Seeder
 {
     public function run()

@@ -17,9 +17,6 @@
 
     <!-- Styles -->
     @vite('resources/css/app.css')
-    <style>
-
-    </style>
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 <div id="app" class="pt-4 bg-zinc-950">
@@ -62,7 +59,6 @@
                 <x-navigation>
                 </x-navigation>
             @endverbatim
-
 </header>
 </div>
 </body>

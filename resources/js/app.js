@@ -6,6 +6,46 @@ import CookieDisagree from "./CookieDisagree.vue";
 import ErrorMesssage from "./ErrorMesssage.vue";
 import Message from "./MessageComponent.vue";
 import ArticleSearch from "./ArticleSearch.vue";
+import { create, all } from 'mathjs';
+
+// P4 T3: Math.js
+const math = create(all);
+
+window.calculateCartTotal = function() {
+    let cartItems = document.querySelectorAll('.cart-item');
+    let total = 0;
+
+    cartItems.forEach(item => {
+        let price = parseFloat(item.querySelector('.item-price').innerText);
+        total = math.add(total, price);
+    });
+
+    document.getElementById('cart-total').innerText = total.toFixed(2);
+    return total;
+}
+
+window.calculateCartItems = function() {
+    let cartItems = document.querySelectorAll('.cart-item');
+    let total = 0;
+
+    cartItems.forEach(item => {
+        total++;
+    });
+
+    document.getElementById('cart-items').innerText = total;
+    return total;
+}
+
+window.calculateAverage = function() {
+    let grades = calculateCartItems();
+    let total =  calculateCartTotal();
+
+    if (grades === 0) {
+        document.getElementById('average').innerText = 0;
+        return;
+    }
+    document.getElementById('average').innerText = math.divide(total, grades).toFixed(2);
+}
 
 const app = createApp({
     // Configuration options
