@@ -1,10 +1,10 @@
 <template>
     <section class="p-8">
-        <nav class="flex justify-center">
-            <ul class="flex-row flex justify-center gap-3 font-bold">
+        <nav class="flex justify-center menu">
+            <ul class="flex-row flex justify-center gap-3 font-bold menu__list">
                 <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)"
-                    @mouseleave="handleMouseLeave">
-                    <a class="underline" :class="{ 'text-gray-800': item.disabled }"
+                    @mouseleave="handleMouseLeave" class="menu__item">
+                    <a class="underline menu__link" :class="{ 'menu__link--disabled': item.disabled }"
                        :href="item.disabled ? null : item.url">{{ item.displayName }}</a>
                     <Transition name="fade">
                         <template v-if="showSubItems === item">
@@ -72,34 +72,82 @@ function handleMouseOver(item) {
 }
 </script>
 
-<style>
-ul {
-    padding-left: 1rem;
+<style lang="scss">
+
+
+:root {
+    --menu-background-color: #18181b;
+    --menu-text-color: #ffffff;
+    --menu-hover-color: #ffffff;
+    --menu-disabled-color: #393939;
+}
+
+.menu {
+    background-color: var(--menu-background-color);
+    display: flex;
+    justify-content: center;
+}
+
+.menu__list {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.menu__item {
+    position: relative;
+    cursor: pointer;
+}
+
+.menu__link {
+    color: var(--menu-text-color);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &--disabled {
+        color: var(--menu-disabled-color);
+
+        &:hover {
+            color: var(--menu-disabled-color);
+        }
+    }
+}
+
+.menu__sublist {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    padding: 1rem;
+    background-color: var(--menu-background-color);
+    border-radius: 0.5rem;
+    z-index: 1;
+}
+
+.menu__subitem {
+    display: block;
+    padding: 0.5rem;
+    color: white;
+
+    &:hover {
+        color: var(--menu-hover-color);
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
 }
 
 .item-with-subitems {
     position: absolute;
-}
+    background-color: var(--menu-disabled-color);
 
-.subitem {
-    opacity: 1; /* Initially hidden */
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-
-a:hover {
-    color: white;
-}
-
-a:not([href]):hover {
-    color: #1f2937;
 }
 </style>

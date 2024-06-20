@@ -1,5 +1,4 @@
 <template>
-
     <div class="flex justify-center">
             <div class="flex w-2/5">
                 <p class="mt-8 p-1 dotted border-t-2 border-l-2 border-current w-1/2"> <button @click="countUp">Count up</button> {{ count }}</p>

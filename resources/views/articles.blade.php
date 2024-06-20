@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Article View</title>
 </head>
-<body class="bg-black h-screen">
-<div class="font-sans antialiased dark:bg-black dark:text-white/50 font p-4 flex flex-col h-full">
+<body class="bg-black">
+<div class="font-sans antialiased dark:bg-black dark:text-white/50 font p-4 flex flex-col h-screen">
     <!-- Custom Scripts -->
     @vite(['resources/js/app.js'])
 
