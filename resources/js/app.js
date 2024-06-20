@@ -6,7 +6,27 @@ import CookieDisagree from "./CookieDisagree.vue";
 import ErrorMesssage from "./ErrorMesssage.vue";
 import Message from "./MessageComponent.vue";
 import ArticleSearch from "./ArticleSearch.vue";
+import Footer from "./Footer.vue";
+import Body from "./Body.vue";
 import { create, all } from 'mathjs';
+
+
+
+const app = createApp({
+    // Configuration options
+});
+
+app.component('x-navigation', Navigation);
+app.component('x-cookie-dialog', CookieDialog);
+app.component('x-new-article', NewArticle);
+app.component('x-cookie-disagree', CookieDisagree);
+app.component('x-error-message', ErrorMesssage);
+app.component('x-message', Message);
+app.component('x-article-search', ArticleSearch);
+app.component('x-footer', Footer);
+app.component('x-body', Body);
+
+app.mount('#app'); // Mount the Vue app to a specific HTML element
 
 // P4 T3: Math.js
 const math = create(all);
@@ -46,17 +66,3 @@ window.calculateAverage = function() {
     }
     document.getElementById('average').innerText = math.divide(total, grades).toFixed(2);
 }
-
-const app = createApp({
-    // Configuration options
-});
-
-app.component('x-navigation', Navigation);
-app.component('x-cookie-dialog', CookieDialog);
-app.component('x-new-article', NewArticle);
-app.component('x-cookie-disagree', CookieDisagree);
-app.component('x-error-message', ErrorMesssage);
-app.component('x-message', Message);
-app.component('x-article-search', ArticleSearch);
-
-app.mount('#app'); // Mount the Vue app to a specific HTML element

@@ -29,7 +29,7 @@ import {ref} from 'vue';
 const navigation = ref([
     {
         displayName: 'Home',
-        url: '/'
+        url: '/newsite'
     },
     {
         displayName: 'Kategorien',

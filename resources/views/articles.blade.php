@@ -36,6 +36,11 @@
                 </div>
             </div>
         </div>
+            <div class="sticky inset-x-0 bottom-0">
+                @verbatim
+                    <x-footer></x-footer>
+                @endverbatim
+            </div>
     </div>
 </div>
 

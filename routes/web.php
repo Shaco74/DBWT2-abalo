@@ -29,3 +29,7 @@ Route::get('/disagreecookies', function () {return view('components.disagree-coo
 
 //Shopping cart
 Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 'showCart']);
+
+Route::get('newsite', function () {
+    return view('newsite');
+});

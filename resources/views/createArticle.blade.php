@@ -11,12 +11,12 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-black">
-
+<div id="app">
 <div class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex justify-center p-8 w-full">
         <div class="row justify-center">
             <h1 class="text-2xl flex justify-center">Artikel erstellen</h1>
-            <div id="app">
+
                 @verbatim
                     <x-cookie-dialog></x-cookie-dialog>
                     <x-navigation></x-navigation>
@@ -25,6 +25,11 @@
                 @endverbatim
             </div>
         </div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0">
+        @verbatim
+            <x-footer></x-footer>
+        @endverbatim
     </div>
 </div>
 </body>
