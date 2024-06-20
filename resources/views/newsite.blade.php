@@ -37,7 +37,7 @@
             <x-body></x-body>
         @endverbatim
     </div>
-    <div class="absolute inset-x-0 bottom-0 ">
+    <div class="sticky inset-x-0 bottom-0">
         @verbatim
             <x-footer></x-footer>
         @endverbatim
