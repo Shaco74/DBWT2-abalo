@@ -8,6 +8,7 @@ import Message from "./MessageComponent.vue";
 import ArticleSearch from "./ArticleSearch.vue";
 import Footer from "./Footer.vue";
 import Body from "./Body.vue";
+import Impressum from "./Impressum.vue";
 import { create, all } from 'mathjs';
 
 
@@ -25,6 +26,7 @@ app.component('x-message', Message);
 app.component('x-article-search', ArticleSearch);
 app.component('x-footer', Footer);
 app.component('x-body', Body);
+app.component('x-impressum', Impressum);
 
 app.mount('#app'); // Mount the Vue app to a specific HTML element
 

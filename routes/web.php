@@ -33,3 +33,7 @@ Route::get('/cart/show', [App\Http\Controllers\ShoppingCartController::class, 's
 Route::get('newsite', function () {
     return view('newsite');
 });
+
+Route::get('impressum', function () {
+    return view('impressum');
+});
