@@ -1,7 +1,12 @@
 <template>
     <div class="search-container">
-        <input type="text" placeholder="Search..." v-model="searchQuery" @input="handleSearch" class="search-container__input">
-        <div v-if="filteredResults.length" class="search-container__results search-results">
+        <input type="text" placeholder="Search..." v-model="searchQuery" @input="handleSearch"
+               class="search-container__input">
+        <div class="pagination">
+            <button @click="changePage(-1)" :disabled="currentPage === 0">Previous</button>
+            <button @click="changePage(1)" :disabled="searchResults.length <= 4">Next</button>
+        </div>
+        <div v-if="searchResults.length" class="search-container__results search-results">
             <table class="search-results__table">
                 <thead>
                 <tr>
@@ -13,16 +18,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="article in filteredResults" :key="article.ab_id" class="search-results__item">
+                <tr v-for="article in searchResults" :key="article.ab_id" class="search-results__item">
                     <td>{{ article.id }}</td>
                     <td>{{ article.ab_name }}</td>
                     <td>{{ article.ab_description }}</td>
                     <td>
-                        <img v-if="article.image" :src="article.image" alt="Article Image" class="search-results__image"/>
+                        <img v-if="article.image" :src="article.image" alt="Article Image"
+                             class="search-results__image"/>
                         <span v-else class="search-results__no-image">No Image Available</span>
                     </td>
                     <td>
-                        <button v-if="!article.isInShoppingCart" @click="addToCart(article)" class="search-results__button">
+                        <button v-if="!article.isInShoppingCart" @click="addToCart(article)"
+                                class="search-results__button">
                             +
                         </button>
                         <span v-else class="search-results__in-cart">Already in cart</span>
@@ -31,6 +38,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </template>
 
@@ -41,6 +49,7 @@ export default {
     data() {
         return {
             searchQuery: '',
+            currentPage: 0,
             searchResults: [],
             filteredResults: []
         };
@@ -51,10 +60,13 @@ export default {
     },
     methods: {
         fetchItems() {
-            axios.get('/api/articles')
+            axios.get('/api/articles', {
+                params: {
+                    page: this.currentPage,
+                }
+            })
                 .then(response => {
                     this.searchResults = response.data.articles;
-                    this.filteredResults = this.searchResults.filter(article => article.isInShoppingCart === false);
                 })
                 .catch(error => {
                     console.error('Error fetching items:', error);
@@ -62,16 +74,26 @@ export default {
         },
         handleSearch() {
             if (this.searchQuery.length >= 3) {
-                this.filteredResults = this.searchResults.filter(article => {
-                    return (
-                        article.ab_name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                        article.ab_description.toLowerCase().includes(this.searchQuery.toLowerCase())
-                    );
-                }).slice(0, 5); // Only take the first 5 results
+                this.currentPage = 0; // Reset the current page when a new search term is entered
+                axios.get('/api/articles', {
+                    params: {
+                        search: this.searchQuery,
+                        page: this.currentPage
+                    }
+                })
+                    .then(response => {
+                        this.searchResults = response.data.articles;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching items:', error);
+                    });
             } else {
-                // Display all items if search term is less than 3 characters
-                this.filteredResults = this.searchResults.filter(article => article.isInShoppingCart === false);
+                this.fetchItems();
             }
+        },
+        changePage(offset) {
+            this.currentPage += offset;
+            this.fetchItems(); // Call the method to fetch items for the new page
         },
         addToCart(article) {
             axios({
@@ -102,6 +124,32 @@ export default {
 </script>
 
 <style lang="scss">
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+
+    button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    :hover {
+        background-color: #1f2937;
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    button:disabled {
+        background-color: rgb(168, 156, 156);
+        cursor: not-allowed;
+    }
+}
+
 .search-container {
     font-family: 'Arial', sans-serif;
     border: 2px solid #333;
