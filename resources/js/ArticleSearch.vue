@@ -122,8 +122,38 @@ export default {
     }
 };
 </script>
-
 <style lang="scss">
+$primary-color: #333;
+$hover-color: #1f2937;
+$disabled-color: rgb(168, 156, 156);
+$button-padding: 5px 10px;
+$border-radius: 5px;
+$table-border-color: #ccc;
+$green: green;
+$dark-green: darkgreen;
+$gray: gray;
+$white: white;
+$black: black;
+$red: red;
+
+%button-styles {
+    padding: $button-padding;
+    border: none;
+    background-color: $primary-color;
+    color: $white;
+    cursor: pointer;
+    border-radius: $border-radius;
+    &:hover {
+        background-color: $hover-color;
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+    &:disabled {
+        background-color: $disabled-color;
+        cursor: not-allowed;
+    }
+}
+
 .pagination {
     width: 100%;
     display: flex;
@@ -131,44 +161,29 @@ export default {
     margin-bottom: 10px;
 
     button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #333;
-        color: white;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    :hover {
-        background-color: #1f2937;
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    button:disabled {
-        background-color: rgb(168, 156, 156);
-        cursor: not-allowed;
+        @extend %button-styles;
     }
 }
 
 .search-container {
     font-family: 'Arial', sans-serif;
-    border: 2px solid #333;
+    border: 2px solid $primary-color;
     padding: 10px;
-    border-radius: 5px;
-    color: white;
+    border-radius: $border-radius;
+    color: $white;
 
     &__input {
         width: 100%;
         padding: 8px;
         margin-bottom: 10px;
         font-size: 16px;
-        border: 1px solid #ccc;
+        border: 1px solid $table-border-color;
         border-radius: 3px;
-        color: black;
+        color: $black;
     }
 
     &__results {
-        color: white !important;
+        color: $white !important;
     }
 }
 
@@ -176,23 +191,23 @@ export default {
     &__table {
         width: 100%;
         border-collapse: collapse;
-        color: white;
+        color: $white;
 
         th, td {
-            border: 1px solid #ccc;
+            border: 1px solid $table-border-color;
             padding: 8px;
             text-align: left;
         }
     }
 
     &__header {
-        background-color: #333;
-        color: white;
+        background-color: $primary-color;
+        color: $white;
     }
 
     &__item {
         &:hover {
-            background-color: #1f2937;
+            background-color: $hover-color;
         }
     }
 
@@ -201,23 +216,23 @@ export default {
     }
 
     &__no-image {
-        color: red;
+        color: $red;
     }
 
     &__button {
-        background-color: green;
-        color: white;
+        background-color: $green;
+        color: $white;
         border: none;
         padding: 5px;
         cursor: pointer;
 
         &:hover {
-            background-color: darkgreen;
+            background-color: $dark-green;
         }
     }
 
     &__in-cart {
-        color: gray;
+        color: $gray;
     }
 }
 
@@ -238,6 +253,6 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #333; /* Farbe des Scrollbalkens beim Hovern */
+    background-color: $primary-color; /* Farbe des Scrollbalkens beim Hovern */
 }
 </style>

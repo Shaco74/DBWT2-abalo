@@ -35,12 +35,21 @@
             </p>
         </div>
         <div class="flex justify-center p-4"><a href="/newsite">Back to Home</a></div>
+            <div id="app">
+                <google-map class="mb-20"
+                    :center="{ lat: 51.1657, lng: 10.4515 }"
+                    :zoom="5"
+                    style="width: 100%; height: 400px"
+                    disabledSearch="true"
+                >
+                </google-map>
+            </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Impressum'
+    name: 'Impressum',
 }
 </script>
 

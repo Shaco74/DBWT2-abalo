@@ -73,17 +73,18 @@ function handleMouseOver(item) {
 </script>
 
 <style lang="scss">
-
-
-:root {
-    --menu-background-color: #18181b;
-    --menu-text-color: #ffffff;
-    --menu-hover-color: #ffffff;
-    --menu-disabled-color: #393939;
-}
+$menu-background-color: #18181b;
+$menu-text-color: #ffffff;
+$menu-hover-color: #ffffff;
+$menu-disabled-color: #393939;
+$gap: 1rem;
+$padding: 1rem;
+$border-radius: 0.5rem;
+$transition-duration: 0.5s;
+$white: white;
 
 .menu {
-    background-color: var(--menu-background-color);
+    background-color: $menu-background-color;
     display: flex;
     justify-content: center;
 }
@@ -100,7 +101,7 @@ function handleMouseOver(item) {
 }
 
 .menu__link {
-    color: var(--menu-text-color);
+    color: $menu-text-color;
     text-decoration: none;
 
     &:hover {
@@ -108,10 +109,10 @@ function handleMouseOver(item) {
     }
 
     &--disabled {
-        color: var(--menu-disabled-color);
+        color: $menu-disabled-color;
 
         &:hover {
-            color: var(--menu-disabled-color);
+            color: $menu-disabled-color;
         }
     }
 }
@@ -122,7 +123,7 @@ function handleMouseOver(item) {
     left: 0;
     display: none;
     padding: 1rem;
-    background-color: var(--menu-background-color);
+    background-color: $menu-background-color;
     border-radius: 0.5rem;
     z-index: 1;
 }
@@ -133,7 +134,7 @@ function handleMouseOver(item) {
     color: white;
 
     &:hover {
-        color: var(--menu-hover-color);
+        color: $menu-hover-color;
     }
 }
 
@@ -147,7 +148,7 @@ function handleMouseOver(item) {
 
 .item-with-subitems {
     position: absolute;
-    background-color: var(--menu-disabled-color);
+    background-color: $menu-background-color;
 
 }
 </style>

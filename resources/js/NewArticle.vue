@@ -36,7 +36,6 @@
 
 <script setup>
 import { ref } from 'vue';
-
 const article = ref({
     ab_name: '',
     ab_description: '',
@@ -79,7 +78,6 @@ const sendArticle = () => {
         });
 };
 </script>
-
 
 <style lang="scss">
 .article-form {

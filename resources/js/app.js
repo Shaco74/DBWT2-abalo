@@ -10,7 +10,7 @@ import Footer from "./Footer.vue";
 import Body from "./Body.vue";
 import Impressum from "./Impressum.vue";
 import { create, all } from 'mathjs';
-
+import GoogleMap from 'vue-google-maps-ui';
 
 
 const app = createApp({
@@ -27,6 +27,7 @@ app.component('x-article-search', ArticleSearch);
 app.component('x-footer', Footer);
 app.component('x-body', Body);
 app.component('x-impressum', Impressum);
+app.component('google-map', GoogleMap);
 
 app.mount('#app'); // Mount the Vue app to a specific HTML element
 
