@@ -33,7 +33,7 @@
             @endverbatim
         </header>
     </div>
-    <div>
+    <div class="pb-10">
         @verbatim
             <x-body></x-body>
         @endverbatim
