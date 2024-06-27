@@ -1,0 +1,17 @@
+{
+    "name": "shaco/abalo_websocketserver",
+    "require": {
+        "cboden/ratchet": "^0.4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shaco\\AbaloWebsocketserver\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kacper",
+            "email": "kacper74@hotmail.com"
+        }
+    ]
+}
