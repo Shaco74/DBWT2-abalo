@@ -15,6 +15,9 @@ Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'islogged
 //Playground
 Route::get('/playground', function () {return view('components.javascript-playground');})->name('playground');
 
+Route::get('/websocket-playground', function () {return view('components.websocket-playground');})->name('playground');
+
+
 //Show articles
 Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'index']);
 Route::get('/articles/{article}', [App\Http\Controllers\ArticlesController::class, 'show']);
