@@ -9,7 +9,9 @@
         "fakerphp/faker": "^1.23",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "ratchet/pawl": "^0.4.1",
+        "react/event-loop": "^1.5"
     },
     "require-dev": {
         "laravel/pint": "^1.13",

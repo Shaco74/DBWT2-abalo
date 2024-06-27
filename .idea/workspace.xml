@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98881a8d-9e9f-4ac2-b6ae-80567ad18978" name="Changes" comment="added article images to storage/app/articleImages">
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,6 +320,15 @@
       <path value="$PROJECT_DIR$/abalo/vendor/psr/clock" />
       <path value="$PROJECT_DIR$/abalo/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/abalo/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/abalo/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/abalo/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/abalo/vendor/ratchet/pawl" />
+      <path value="$PROJECT_DIR$/abalo/vendor/ratchet/rfc6455" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -415,7 +429,7 @@
       <workItem from="1719342838346" duration="1194000" />
       <workItem from="1719344168760" duration="1484000" />
       <workItem from="1719477495370" duration="8120000" />
-      <workItem from="1719491793905" duration="680000" />
+      <workItem from="1719491793905" duration="2947000" />
     </task>
     <task id="LOCAL-00001" summary="refactoring - formatting, documentation, out-sourcing functions, namings">
       <option name="closed" value="true" />
