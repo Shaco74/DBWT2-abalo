@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98881a8d-9e9f-4ac2-b6ae-80567ad18978" name="Changes" comment="added article images to storage/app/articleImages">
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/abalo/resources/js/SoldAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/ShoppingCartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/ShoppingCartController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/views/createArticle.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/createArticle.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/views/newsite.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/newsite.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/views/shoppingCart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/shoppingCart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -343,11 +349,12 @@
   "keyToString": {
     "PHPUnit.Main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.laravel-idea.search-composer-json": "true",
     "RunOnceActivity.laravel-idea.update-module-directories": "true",
     "Shell Script.Run DBWT2.executor": "Debug",
     "Shell Script.artisan serve.executor": "Run",
-    "git-widget-placeholder": "fixing-fucked-branches",
-    "last_opened_file_path": "/home/shaco/Documents/privaterCOde/DBWT2-abalo/abalo",
+    "git-widget-placeholder": "kacper-dev-v2",
+    "last_opened_file_path": "/home/shaco/Documents/privaterCOde/DBWT2-abalo/abalo/resources/js",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -368,11 +375,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/abalo/resources/js" />
       <recent name="$PROJECT_DIR$/abalo" />
       <recent name="$PROJECT_DIR$/abalo/resources/views/components" />
       <recent name="$PROJECT_DIR$/abalo_websocketserver" />
       <recent name="$PROJECT_DIR$/database/migrations" />
-      <recent name="$PROJECT_DIR$/resources/views/components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/abalo" />
@@ -430,6 +437,7 @@
       <workItem from="1719344168760" duration="1484000" />
       <workItem from="1719477495370" duration="8120000" />
       <workItem from="1719491793905" duration="2947000" />
+      <workItem from="1719557106187" duration="10418000" />
     </task>
     <task id="LOCAL-00001" summary="refactoring - formatting, documentation, out-sourcing functions, namings">
       <option name="closed" value="true" />

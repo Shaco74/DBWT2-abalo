@@ -1,30 +1,42 @@
 <template>
-    <section class="p-8">
-        <nav class="flex justify-center menu">
-            <ul class="flex-row flex justify-center gap-3 font-bold menu__list">
-                <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)"
-                    @mouseleave="handleMouseLeave" class="menu__item">
-                    <a class="underline menu__link" :class="{ 'menu__link--disabled': item.disabled }"
-                       :href="item.disabled ? null : item.url">{{ item.displayName }}</a>
-                    <Transition name="fade">
-                        <template v-if="showSubItems === item">
-                            <ul class="item-with-subitems bg-slate-900 bg-opacity-25">
-                                <li class="subitem" v-for="subItem in item.subItems" :key="subItem.displayName">
-                                    <a :class="{ 'text-gray-800': subItem.disabled }"
-                                       :href="subItem.disabled ? null : subItem.url">{{ subItem.displayName }}</a>
-                                </li>
-                            </ul>
-                        </template>
-                    </Transition>
-                </li>
-            </ul>
-        </nav>
-    </section>
+    <div>
+        <div class="flex flex-row w-full items-center justify-around">
+            <section class="p-8">
+                <nav class="flex justify-center menu">
+                    <ul class="flex-row flex justify-center gap-3 font-bold menu__list">
+                        <li v-for="item in navigation" :key="item.displayName" @mouseover="() => handleMouseOver(item)"
+                            @mouseleave="handleMouseLeave" class="menu__item">
+                            <a class="underline menu__link" :class="{ 'menu__link--disabled': item.disabled }"
+                               :href="item.disabled ? null : item.url">{{ item.displayName }}</a>
+                            <Transition name="fade">
+                                <template v-if="showSubItems === item">
+                                    <ul class="item-with-subitems bg-slate-900 bg-opacity-25">
+                                        <li class="subitem" v-for="subItem in item.subItems" :key="subItem.displayName">
+                                            <a :class="{ 'text-gray-800': subItem.disabled }"
+                                               :href="subItem.disabled ? null : subItem.url">{{
+                                                    subItem.displayName
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </template>
+                            </Transition>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <div class="flex justify-center bg-amber-700 rounded-2xl p-3 text-white">
+                <a v-if="isLoggedIn" href="/logout" class="btn btn-primary">Logout</a>
+                <a v-else href="/login" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+        <SoldAlert/>
+    </div>
 </template>
 
 <script setup>
-
-import {ref} from 'vue';
+import {ref, onMounted} from 'vue';
+import SoldAlert from "./SoldAlert.vue";
+import axios from 'axios';
 
 const navigation = ref([
     {
@@ -46,6 +58,7 @@ const navigation = ref([
     },
     {
         displayName: 'Unternehmen',
+        disabled: true,
         subItems: [
             {
                 displayName: 'Philosophie',
@@ -58,10 +71,15 @@ const navigation = ref([
                 disabled: true,
             }
         ]
+    },
+    {
+        displayName: 'Warenkorb',
+        url: '/cart/show',
     }
 ]);
 
 const showSubItems = ref(null); // Track the currently hovered parent item
+const isLoggedIn = ref(false); // Track login status
 
 function handleMouseLeave() {
     showSubItems.value = null;
@@ -70,11 +88,21 @@ function handleMouseLeave() {
 function handleMouseOver(item) {
     showSubItems.value = item;
 }
+
+// Fetch session data on component mount
+onMounted(async () => {
+    try {
+        const response = await axios.get('/isloggedin');
+        console.log('response');
+        console.log(response);
+        isLoggedIn.value = response.data.auth === "true";
+    } catch (error) {
+        console.error('Error fetching session data:', error);
+    }
+});
 </script>
 
 <style lang="scss">
-
-
 :root {
     --menu-background-color: #18181b;
     --menu-text-color: #ffffff;

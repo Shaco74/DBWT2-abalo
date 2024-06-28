@@ -26,7 +26,7 @@
         @verbatim
             <x-message></x-message>
         @endverbatim
-        <header class="items-center gap-2 py-5 flex flex-row-reverse w-full justify-around">
+        <header class="w-full">
             @verbatim
                 <x-cookie-dialog></x-cookie-dialog>
                 <x-navigation></x-navigation>

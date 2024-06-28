@@ -84,32 +84,32 @@ class ArticlesController extends Controller {
      * P3: Task 7
      * Create an API endpoint that allows you to search for articles by name.
      * */
- public function search_api(Request $request) {
-    $searchTerm = $request->query('search');
-    $page = $request->query('page');
+    public function search_api(Request $request) {
+        $searchTerm = $request->query('search');
+        $page = $request->query('page');
 
-    $query = Article::query();
+        $query = Article::query();
 
-    if ($searchTerm !== null) {
-        $query->where('ab_name', 'ilike', "%$searchTerm%")
-            ->orWhere('ab_description', 'ilike', "%$searchTerm%")
-            ->orWhere('ab_price', 'ilike', "%$searchTerm%");
+        if ($searchTerm !== null) {
+            $query->where('ab_name', 'ilike', "%$searchTerm%")
+                ->orWhere('ab_description', 'ilike', "%$searchTerm%")
+                ->orWhere('ab_price', 'ilike', "%$searchTerm%");
+        }
+
+        if (isset($page)) {
+            $offset = ($page > 0) ? ($page * 5) : 0;
+            $query->offset($offset)->limit(5);
+        }
+
+        $articles = $query->get();
+
+        foreach ($articles as $article) {
+            $article->image = $this->getArticleImage($article);
+            $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
+        }
+
+        return response()->json(['articles' => $articles]);
     }
-
-    if (isset($page)) {
-        $offset = ($page > 0) ? ($page * 5) : 0;
-        $query->offset($offset)->limit(5);
-    }
-
-    $articles = $query->get();
-
-    foreach ($articles as $article) {
-        $article->image = $this->getArticleImage($article);
-        $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
-    }
-
-    return response()->json(['articles' => $articles]);
-}
 
     /**
      * P3: Task 8
@@ -136,4 +136,49 @@ class ArticlesController extends Controller {
             return response()->json(['error' => 'An error occurred while creating the article: ' . $e->getMessage()], 500);
         }
     }
+
+    public function sold(Request $request, $id) {
+        // This would to the same as "markAsSold" but through api.
+        // This wasnt used at the end to what appeared to be a deadlock
+        // when calling from a controller a diffrent one thorugh api calls
+        return response()->json(['success' => true]);
+        $article = Article::find($id);
+        $creatorId = $article->ab_creator_id;
+
+        return response()->json(['success' => true, 'creatorId' => $creatorId]);
+    }
+
+    public function markAsSold($articleId) {
+        $article = Article::find($articleId);
+        if (!$article) {
+            return response()->json(['error' => 'Article not found'], 404);
+        }
+
+        $creatorId = $article->ab_creator_id;
+        $articleName = $article->ab_name;
+
+        $loop = \React\EventLoop\Loop::get();
+        $connector = new \Ratchet\Client\Connector($loop);
+
+        $connector('ws://localhost:8085/sells')
+            ->then(function(\Ratchet\Client\WebSocket $conn) use ($creatorId, $articleName) {
+                $message = json_encode([
+                    'isServer' => true,
+                    'creatorId' => $creatorId,
+                    'articleName' => $articleName,
+                    'message' => "Your item '{$articleName}' has been sold!",
+                    'timestamp' => time()
+                ]);
+
+                $conn->send($message);
+                $conn->close();
+            }, function(\Exception $e) {
+                echo "Could not connect: {$e->getMessage()}\n";
+            });
+
+        $loop->run();
+
+        return response()->json(['success' => true, 'creatorId' => $creatorId]);
+    }
+
 }

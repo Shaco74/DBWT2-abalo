@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 /**
  * Controller for the Article model.
  */
+
 /**
  * Class ShoppingCartController <br>
  * Controlling the shopping cart
@@ -21,54 +22,60 @@ use Illuminate\Http\Request;
  * getShoppingCart(Request $request) <br>
  * getItemIdsFromCart(Request $request) <br>
  * removeArticleFromCart(Request $request) <br>
-*/
+ */
 class ShoppingCartController extends Controller {
-   public function addArticleToCart(Request $request) {
-    try {
-        $articleId = $request->input('articleId');
-        $shoppingCartId = 99; // Die ID des Shoppingcarts, auf das sich das Item beziehen soll
+    protected $articleController;
 
-        // Überprüfe, ob das Shoppingcart mit der ID 99 existiert
-        $shoppingCart = Shoppingcart::find($shoppingCartId);
-        if (!$shoppingCart) {
-            // Falls nicht, erstelle das Shoppingcart
-            $shoppingCart = new Shoppingcart();
-            $shoppingCart->id = 99;
-            $shoppingCart->ab_creator_id = 99; // Replace $userId with the actual user ID
-            $shoppingCart->ab_createdate = now();
-            $shoppingCart->save();
-        }
-
-        // Check if the article with the given ID exists
-        $article = Article::find($articleId);
-        if (!$article) {
-            return response()->json(['error' => 'Der Artiekel mit der angegebenen ID ist nicher vorhanden'], 404);
-        }
-
-        // Check if the article is already in the shopping cart
-        $existingItem = ShoppingcartItem::where('ab_article_id', $articleId)
-            ->where('ab_shoppingcart_id', $shoppingCartId)
-            ->first();
-
-        if ($existingItem) {
-            return response()->json(['error' => 'Der Artikel ist bereits im Shoppuingcart'], 400);
-        }
-
-        // Speichere das neue Item in der Datenbank und referenziere das Shoppingcart
-        $shoppingCartItem = new ShoppingcartItem();
-        $shoppingCartItem->ab_article_id = $articleId;
-        $shoppingCartItem->ab_shoppingcart_id = $shoppingCartId;
-        $shoppingCartItem->ab_createdate = now(); // Verwende den aktuellen Zeitstempel
-        $shoppingCartItem->save();
-
-        // Falls du die ID des neuen Eintrags zurückgeben möchtest
-        return response()->json(['id' => $shoppingCartItem->id], 201);
-
-    } catch (Exception $e) {
-        $errorMessage = 'An error occurred while adding the article to the cart: ' . $e->getMessage();
-        return response()->json(['error' => $errorMessage], 500);
+    public function __construct(ArticlesController $articlesController)
+    {
+        $this->articleController = $articlesController;
     }
-}
+    public function addArticleToCart(Request $request) {
+        try {
+            $articleId = $request->input('articleId');
+            $shoppingCartId = 99; // Die ID des Shoppingcarts, auf das sich das Item beziehen soll
+
+            // Überprüfe, ob das Shoppingcart mit der ID 99 existiert
+            $shoppingCart = Shoppingcart::find($shoppingCartId);
+            if (!$shoppingCart) {
+                // Falls nicht, erstelle das Shoppingcart
+                $shoppingCart = new Shoppingcart();
+                $shoppingCart->id = 99;
+                $shoppingCart->ab_creator_id = 99; // Replace $userId with the actual user ID
+                $shoppingCart->ab_createdate = now();
+                $shoppingCart->save();
+            }
+
+            // Check if the article with the given ID exists
+            $article = Article::find($articleId);
+            if (!$article) {
+                return response()->json(['error' => 'Der Artiekel mit der angegebenen ID ist nicher vorhanden'], 404);
+            }
+
+            // Check if the article is already in the shopping cart
+            $existingItem = ShoppingcartItem::where('ab_article_id', $articleId)
+                ->where('ab_shoppingcart_id', $shoppingCartId)
+                ->first();
+
+            if ($existingItem) {
+                return response()->json(['error' => 'Der Artikel ist bereits im Shoppuingcart'], 400);
+            }
+
+            // Speichere das neue Item in der Datenbank und referenziere das Shoppingcart
+            $shoppingCartItem = new ShoppingcartItem();
+            $shoppingCartItem->ab_article_id = $articleId;
+            $shoppingCartItem->ab_shoppingcart_id = $shoppingCartId;
+            $shoppingCartItem->ab_createdate = now(); // Verwende den aktuellen Zeitstempel
+            $shoppingCartItem->save();
+
+            // Falls du die ID des neuen Eintrags zurückgeben möchtest
+            return response()->json(['id' => $shoppingCartItem->id], 201);
+
+        } catch (Exception $e) {
+            $errorMessage = 'An error occurred while adding the article to the cart: ' . $e->getMessage();
+            return response()->json(['error' => $errorMessage], 500);
+        }
+    }
 
     public function getShoppingCart(Request $request) {
         try {
@@ -207,5 +214,41 @@ class ShoppingCartController extends Controller {
     private function getArticleImage($article) {
         // Implementiere die Logik, um das Bild des Artikels zu holen
         return $article->image_url; // Beispiel für ein Bild-URL-Feld
+    }
+
+
+    public function buy(Request $request)
+    {
+        try {
+            $shoppingCartId = 99; // The ID of the shopping cart to be processed
+
+            // Check if the shopping cart with the ID 99 exists
+            $shoppingCart = Shoppingcart::find($shoppingCartId);
+            if (!$shoppingCart) {
+                return response()->json(['error' => 'Shopping cart not found'], 404);
+            }
+
+            // Get all items in the shopping cart
+            $shoppingCartItems = ShoppingcartItem::where('ab_shoppingcart_id', $shoppingCartId)->get();
+
+            // Process each item in the shopping cart
+            foreach ($shoppingCartItems as $item) {
+                $articleId = $item->ab_article_id;
+                try {
+                    $this->articleController->markAsSold($articleId);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Failed to mark article as sold: ' . $e->getMessage()], 500);
+                }
+
+                // Remove the item from the shopping cart
+                $item->delete();
+            }
+
+            return response()->json(['success' => true], 200);
+
+        } catch (Exception $e) {
+            $errorMessage = 'An error occurred while processing the purchase: ' . $e->getMessage();
+            return response()->json(['error' => $errorMessage], 500);
+        }
     }
 }

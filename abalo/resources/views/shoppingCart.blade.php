@@ -9,8 +9,11 @@
     @vite('resources/js/app.js')
 </head>
 <body class="bg-black text-white">
+<div id="app">
 <div class="container mx-auto mt-10">
-    <h1 class="text-3xl mb-4">Warenkorb</h1>
+    @verbatim
+        <x-navigation></x-navigation>
+    @endverbatim
     <a href="http://127.0.0.1:8020/articles">Back to Articles</a>
     <table class="min-w-full bg-gray-800 rounded-lg">
         <thead>
@@ -40,13 +43,38 @@
         @endforeach
         </tbody>
     </table>
+    <button hidden="{{empty($articlesCart)}}" id="buy-button" class="my-3 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Buy all</button>
     <div>
         <h3>Total: <span id="cart-total"></span></h3>
         <h3 class="hidden"><span id="cart-items"></span> </h3>
         <h3>Average: <span id="average"></span> </h3>
     </div>
 </div>
+</div>
+
 <script>
+    document.getElementById('buy-button').addEventListener('click', function() {
+        fetch('/api/shoppingcart/buy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Purchase successful!');
+                    window.location.reload();
+                } else {
+                    alert('An error occurred: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         calculateCartTotal();
     });

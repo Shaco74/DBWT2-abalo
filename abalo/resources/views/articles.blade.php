@@ -18,23 +18,12 @@
             <x-cookie-dialog></x-cookie-dialog>
             <x-navigation></x-navigation>
         @endverbatim
-        <div class="flex flex-grow ">
-            <div class="basis-1/4"></div>
-            <div class="basis-1/2 flex flex-col">
+        <div class="flex flex-grow justify-center">
                 <div class="p-4">
                     @verbatim
                         <x-article-search></x-article-search>
                     @endverbatim
                 </div>
-            </div>
-            <div class="basis-1/4">
-                <div class="mb-4 pl-4">
-                    <div class="overflow-y-auto h-64">
-                        <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" href="/cart/show">Warenkorb
-                            anzeigen</a>
-                    </div>
-                </div>
-            </div>
         </div>
             <div class="sticky inset-x-0 bottom-0">
                 @verbatim

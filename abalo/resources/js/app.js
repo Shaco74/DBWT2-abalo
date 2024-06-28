@@ -68,3 +68,29 @@ window.calculateAverage = function() {
     }
     document.getElementById('average').innerText = math.divide(total, grades).toFixed(2);
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    // ich lasse das snippet hier, eventuell wird es im nächsten Meilenstein nützlich
+  /*  const socket = new WebSocket('ws://localhost:8085/sells');
+
+    socket.onopen = function(event) {
+        console.log('WebSocket is connected.');
+    };
+
+    socket.onmessage = function(event) {
+        const message = JSON.parse(event.data);
+        console.log('Received message:', message);
+
+        if (message.creatorId === 'uuid-123') {
+            alert('Your item has been sold!');
+        }
+    };
+
+    socket.onclose = function(event) {
+        console.log('WebSocket is closed.');
+    };
+
+    socket.onerror = function(error) {
+        console.error('WebSocket error:', error);
+    };*/
+});

@@ -13,13 +13,18 @@
 <body class="bg-black">
 <div id="app">
 <div class="font-sans antialiased dark:bg-black dark:text-white/50">
+    <header>
+        @verbatim
+        <x-cookie-dialog></x-cookie-dialog>
+        <x-navigation></x-navigation>
+        @endverbatim
+    </header>
     <div class="flex justify-center p-8 w-full">
-        <div class="row justify-center">
+        <div class="row justify-center w-[50%]">
             <h1 class="text-2xl flex justify-center">Artikel erstellen</h1>
 
                 @verbatim
-                    <x-cookie-dialog></x-cookie-dialog>
-                    <x-navigation></x-navigation>
+
                     <x-new-article></x-new-article>
                     <x-create-api></x-create-api>
                 @endverbatim

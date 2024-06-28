@@ -15,8 +15,10 @@ Route::post('/shoppingcart', [App\Http\Controllers\ShoppingCartController::class
 Route::post('/shoppingcart/remove', [App\Http\Controllers\ShoppingCartController::class, 'removeArticleFromCart']);
 Route::get('/shoppingcart', [App\Http\Controllers\ShoppingCartController::class, 'getShoppingCart']);
 //Route::get('/shoppingcart/items/ids', [App\Http\Controllers\ShoppingCartController::class, 'getItemIdsFromCart']);
-
+Route::post('/shoppingcart/buy', [App\Http\Controllers\ShoppingCartController::class, 'buy']);
 
 //Shopping cart
 Route::post('/cart/add', [App\Http\Controllers\ShoppingCartController::class, 'add']);
 Route::delete('/cart/remove', [App\Http\Controllers\ShoppingCartController::class, 'remove']);
+
+Route::post('/articles/{id}/sold', [App\Http\Controllers\ArticlesController::class, 'sold']);
