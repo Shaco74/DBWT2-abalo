@@ -56,13 +56,15 @@ class Chat implements MessageComponentInterface
         }
     }
 
-    public function onClose(ConnectionInterface $conn) {
+    public function onClose(ConnectionInterface $conn)
+    {
         // Detach the connection
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e) {
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
         echo "An error has occurred: {$e->getMessage()}\n";
         $conn->close();
     }
@@ -183,6 +185,53 @@ class Sell implements MessageComponentInterface
     }
 }
 
+
+class DiscountAlert implements MessageComponentInterface
+{
+    protected SplObjectStorage $clients;
+
+    public function __construct()
+    {
+        $this->clients = new \SplObjectStorage;
+    }
+
+    public function onOpen(ConnectionInterface $conn)
+    {
+        // Store the new connection
+        $this->clients->attach($conn);
+        $conn->sessionID = uniqid();
+
+        echo "New connection on /discount-alert! ({$conn->resourceId})\n";
+    }
+
+    public function onMessage(ConnectionInterface $from, $msg)
+    {
+        //echo "New discount alert: {$msg['articleName']} is now {$msg['discountPercentage']}% off!\n";
+        $parsedMsg = json_decode($msg, true);
+        echo "New discount alert: {$parsedMsg}% off!\n";
+        $alertMsgJson = json_encode($parsedMsg);
+        echo "amount of clients: {$this->clients->count()}\n";
+        foreach ($this->clients as $client) {
+            echo "Sending discount alert to client: {$client->resourceId}\n";
+            $client->send($alertMsgJson);
+        }
+    }
+
+    public function onClose(ConnectionInterface $conn)
+    {
+        // Detach the connection
+        $this->clients->detach($conn);
+        echo "Connection {$conn->resourceId} on /discount-alert has disconnected\n";
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
+        echo "An error has occurred on /discount-alert: {$e->getMessage()}\n";
+        $conn->close();
+    }
+}
+
+
 // Define the maintenance status
 $isInMaintenance = false;
 
@@ -196,9 +245,10 @@ $server = new App('localhost', 8085, '0.0.0.0', $loop);
 $server->route('/chat', new Chat, array('*'));
 $server->route('/check-maintenance', new WsServer($checkMaintenance), array('*'));
 $server->route('/sells', new WsServer(new Sell), array('*'));
+$server->route('/discount-alert', new WsServer(new DiscountAlert), array('*'));
 
 // Periodically broadcast the maintenance status every minute
-$loop->addPeriodicTimer(60, function() use ($checkMaintenance) {
+$loop->addPeriodicTimer(60, function () use ($checkMaintenance) {
     $checkMaintenance->broadcastMaintenanceStatus();
 });
 

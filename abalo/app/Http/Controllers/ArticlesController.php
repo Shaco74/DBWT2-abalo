@@ -4,10 +4,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Shoppingcart;
 use App\Models\ShoppingcartItem;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Ratchet\Client\Connector;
+use React\EventLoop\Loop;
 
 /**
  * Controller for the Article model.
@@ -81,17 +85,17 @@ class ArticlesController extends Controller {
     }
 
     public function getUsersArticles(Request $request, $userId) {
-            // Fetch articles created by the user with the given userId
-            $articles = Article::where('ab_creator_id', $userId)->get();
+        // Fetch articles created by the user with the given userId
+        $articles = Article::where('ab_creator_id', $userId)->get();
 
-            // Add image and shopping cart status to each article
-            foreach ($articles as $article) {
-                $article->image = $this->getArticleImage($article);
-                $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
-            }
+        // Add image and shopping cart status to each article
+        foreach ($articles as $article) {
+            $article->image = $this->getArticleImage($article);
+            $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
+        }
 
-            // Return the articles as a JSON response
-            return response()->json($articles);
+        // Return the articles as a JSON response
+        return response()->json($articles);
     }
 
     /**
@@ -175,7 +179,7 @@ class ArticlesController extends Controller {
         $connector = new \Ratchet\Client\Connector($loop);
 
         $connector('ws://localhost:8085/sells')
-            ->then(function(\Ratchet\Client\WebSocket $conn) use ($creatorId, $articleName) {
+            ->then(function (\Ratchet\Client\WebSocket $conn) use ($creatorId, $articleName) {
                 $message = json_encode([
                     'isServer' => true,
                     'creatorId' => $creatorId,
@@ -186,7 +190,7 @@ class ArticlesController extends Controller {
 
                 $conn->send($message);
                 $conn->close();
-            }, function(\Exception $e) {
+            }, function (\Exception $e) {
                 echo "Could not connect: {$e->getMessage()}\n";
             });
 
@@ -196,16 +200,64 @@ class ArticlesController extends Controller {
     }
 
     public function setDiscount(Request $request) {
+        $isCheaper = true;
         $articleId = $request->input('articleId');
-        $discount = $request->input('newPrice');
+        $newPrice = $request->input('newPrice');
 
         $article = Article::find($articleId);
         if (!$article) {
             return response()->json(['error' => 'Article not found'], 404);
         }
 
-        $article->ab_discount = $discount;
+        $originalPrice = $article->ab_price;
+        if ($newPrice >= $originalPrice) {
+            $isCheaper = false;
+        }
+
+        $article->ab_discount = $newPrice;
         $article->save();
+
+
+        if (!$isCheaper) {
+            return response()->json(['success' => true]);
+        }
+        // Calculate discount percentage
+        $discountPercentage = (($originalPrice - $newPrice) / $originalPrice) * 100;
+        $discountPercentage = round($discountPercentage, 2);
+
+        // Get shopping cart items that contain the specified article
+        $shoppingcartItems = ShoppingcartItem::where('ab_article_id', $articleId)->get();
+
+        // Get shopping carts associated with these items
+        $shoppingcartIds = $shoppingcartItems->pluck('ab_shoppingcart_id')->toArray();
+        $shoppingcarts = Shoppingcart::whereIn('id', $shoppingcartIds)->get();
+
+        // Extract user IDs from the shopping carts
+        $userIds = $shoppingcarts->pluck('ab_creator_id')->toArray();
+
+        // Prepare the discount alert message
+        $alertMsg = [
+            'isServer' => true,
+            'userIds' => $userIds,
+            'articleName' => $article->ab_name,
+            'newPrice' => $newPrice,
+            'discountPercentage' => $discountPercentage,
+            'timestamp' => time()
+        ];
+
+        // Broadcast the discount alert
+        $loop = Loop::get();
+        $connector = new Connector($loop);
+
+        $connector('ws://localhost:8085/discount-alert')
+            ->then(function ($conn) use ($alertMsg) {
+                $conn->send(json_encode($alertMsg));
+                $conn->close();
+            }, function ($e) {
+                echo "Could not connect: {$e->getMessage()}\n";
+            });
+
+        $loop->run();
 
         return response()->json(['success' => true]);
     }

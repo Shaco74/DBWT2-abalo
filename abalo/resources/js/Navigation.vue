@@ -30,6 +30,7 @@
             </div>
         </div>
         <SoldAlert/>
+        <DiscountAlert/>
     </div>
 </template>
 
@@ -37,6 +38,7 @@
 import {ref, onMounted} from 'vue';
 import SoldAlert from "./SoldAlert.vue";
 import axios from 'axios';
+import DiscountAlert from "./DiscountAlert.vue";
 
 const navigation = ref([
     {

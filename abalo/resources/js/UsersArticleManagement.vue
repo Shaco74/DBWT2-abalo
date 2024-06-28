@@ -20,7 +20,7 @@
                     <td>{{ article.ab_name }}</td>
                     <td>{{ article.ab_description }}</td>
                     <td>
-                        <span v-if="article.ab_discount && article.ab_discount !== article.ab_price">
+                        <span v-if="article.ab_discount && (article.ab_discount - article.ab_price !== 0)">
                             <span style="text-decoration: line-through;">{{ article.ab_price }} €</span>
                             <span>{{ article.ab_discount }} €</span>
                         </span>

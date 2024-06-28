@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98881a8d-9e9f-4ac2-b6ae-80567ad18978" name="Changes" comment="added article images to storage/app/articleImages">
+      <change afterPath="$PROJECT_DIR$/abalo/resources/js/DiscountAlert.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/resources/js/UsersArticleManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/UsersArticleManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -431,7 +429,7 @@
       <workItem from="1719344168760" duration="1484000" />
       <workItem from="1719477495370" duration="8120000" />
       <workItem from="1719491793905" duration="2947000" />
-      <workItem from="1719557106187" duration="20003000" />
+      <workItem from="1719557106187" duration="23849000" />
     </task>
     <task id="LOCAL-00001" summary="refactoring - formatting, documentation, out-sourcing functions, namings">
       <option name="closed" value="true" />
