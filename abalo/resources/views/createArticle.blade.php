@@ -20,18 +20,16 @@
         @endverbatim
     </header>
     <div class="flex justify-center p-8 w-full">
-        <div class="row justify-center w-[50%]">
+        <div class="row justify-center ">
             <h1 class="text-2xl flex justify-center">Artikel erstellen</h1>
-
                 @verbatim
-
                     <x-new-article></x-new-article>
                     <x-create-api></x-create-api>
                 @endverbatim
             </div>
         </div>
     </div>
-    <div class="absolute inset-x-0 bottom-0">
+    <div class=" inset-x-0 bottom-0">
         @verbatim
             <x-footer></x-footer>
         @endverbatim

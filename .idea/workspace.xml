@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98881a8d-9e9f-4ac2-b6ae-80567ad18978" name="Changes" comment="added article images to storage/app/articleImages">
-      <change afterPath="$PROJECT_DIR$/abalo/resources/js/SoldAlert.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/laravel-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/ArticlesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/app/Http/Controllers/ShoppingCartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/app/Http/Controllers/ShoppingCartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/ArticleSearch.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/ArticleSearch.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/Navigation.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/NewArticle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/NewArticle.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/UsersArticleManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/UsersArticleManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/abalo/resources/js/util/getLoginContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/js/util/getLoginContext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/resources/views/createArticle.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/createArticle.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/resources/views/newsite.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/newsite.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo/resources/views/shoppingCart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/resources/views/shoppingCart.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/abalo/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" beforeDir="false" afterPath="$PROJECT_DIR$/abalo_websocketserver/src/websocker_server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +381,7 @@
       <recent name="$PROJECT_DIR$/database" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.Main">
+  <component name="RunManager" selected="Shell Script.Run DBWT2">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -437,7 +432,7 @@
       <workItem from="1719344168760" duration="1484000" />
       <workItem from="1719477495370" duration="8120000" />
       <workItem from="1719491793905" duration="2947000" />
-      <workItem from="1719557106187" duration="10418000" />
+      <workItem from="1719557106187" duration="16692000" />
     </task>
     <task id="LOCAL-00001" summary="refactoring - formatting, documentation, out-sourcing functions, namings">
       <option name="closed" value="true" />

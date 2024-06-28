@@ -93,8 +93,6 @@ function handleMouseOver(item) {
 onMounted(async () => {
     try {
         const response = await axios.get('/isloggedin');
-        console.log('response');
-        console.log(response);
         isLoggedIn.value = response.data.auth === "true";
     } catch (error) {
         console.error('Error fetching session data:', error);

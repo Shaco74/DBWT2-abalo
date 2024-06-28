@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "mathjs": "^12",
-        "sweetalert": "^2.1.2"
+        "sweetalert": "^2.1.2",
+        "vuetify": "^3.6.10"
     }
 }

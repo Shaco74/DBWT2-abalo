@@ -10,6 +10,7 @@ Route::get('/user', function (Request $request) {
 //API
 Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
 Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);
+Route::get('/user/{userId}/articles', [App\Http\Controllers\ArticlesController::class, 'getUsersArticles']);
 
 Route::post('/shoppingcart', [App\Http\Controllers\ShoppingCartController::class, 'addArticleToCart']);
 Route::post('/shoppingcart/remove', [App\Http\Controllers\ShoppingCartController::class, 'removeArticleFromCart']);
@@ -21,4 +22,5 @@ Route::post('/shoppingcart/buy', [App\Http\Controllers\ShoppingCartController::c
 Route::post('/cart/add', [App\Http\Controllers\ShoppingCartController::class, 'add']);
 Route::delete('/cart/remove', [App\Http\Controllers\ShoppingCartController::class, 'remove']);
 
+// not used
 Route::post('/articles/{id}/sold', [App\Http\Controllers\ArticlesController::class, 'sold']);

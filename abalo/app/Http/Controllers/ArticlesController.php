@@ -80,6 +80,20 @@ class ArticlesController extends Controller {
         return $article;
     }
 
+    public function getUsersArticles(Request $request, $userId) {
+            // Fetch articles created by the user with the given userId
+            $articles = Article::where('ab_creator_id', $userId)->get();
+
+            // Add image and shopping cart status to each article
+            foreach ($articles as $article) {
+                $article->image = $this->getArticleImage($article);
+                $article->isInShoppingCart = ShoppingcartItem::where('ab_article_id', $article->id)->exists();
+            }
+
+            // Return the articles as a JSON response
+            return response()->json($articles);
+    }
+
     /**
      * P3: Task 7
      * Create an API endpoint that allows you to search for articles by name.
