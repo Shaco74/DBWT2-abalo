@@ -11,6 +11,8 @@ Route::get('/user', function (Request $request) {
 Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'search_api']);
 Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 'store_api']);
 Route::get('/user/{userId}/articles', [App\Http\Controllers\ArticlesController::class, 'getUsersArticles']);
+Route::post('/articles/discount', [App\Http\Controllers\ArticlesController::class, 'setDiscount']);
+
 
 Route::post('/shoppingcart', [App\Http\Controllers\ShoppingCartController::class, 'addArticleToCart']);
 Route::post('/shoppingcart/remove', [App\Http\Controllers\ShoppingCartController::class, 'removeArticleFromCart']);

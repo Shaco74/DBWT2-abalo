@@ -195,4 +195,19 @@ class ArticlesController extends Controller {
         return response()->json(['success' => true, 'creatorId' => $creatorId]);
     }
 
+    public function setDiscount(Request $request) {
+        $articleId = $request->input('articleId');
+        $discount = $request->input('newPrice');
+
+        $article = Article::find($articleId);
+        if (!$article) {
+            return response()->json(['error' => 'Article not found'], 404);
+        }
+
+        $article->ab_discount = $discount;
+        $article->save();
+
+        return response()->json(['success' => true]);
+    }
+
 }

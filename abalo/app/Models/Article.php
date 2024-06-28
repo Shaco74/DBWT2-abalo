@@ -10,6 +10,6 @@ class Article extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'ab_name', 'ab_price', 'ab_description', 'ab_creator_id', 'ab_createdate'];
+    protected $fillable = ['id', 'ab_name', 'ab_price', 'ab_discount', 'ab_description', 'ab_creator_id', 'ab_createdate'];
 
 }

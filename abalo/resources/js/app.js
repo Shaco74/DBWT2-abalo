@@ -11,7 +11,21 @@ import Body from "./Body.vue";
 import Impressum from "./Impressum.vue";
 import { create, all } from 'mathjs';
 
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+    components,
+    directives,
+    icons: {
+        defaultSet: 'mdi', // This is already the default value - only for display purposes
+    },
+})
 
 const app = createApp({
     // Configuration options
@@ -28,6 +42,7 @@ app.component('x-footer', Footer);
 app.component('x-body', Body);
 app.component('x-impressum', Impressum);
 
+app.use(vuetify);
 app.mount('#app'); // Mount the Vue app to a specific HTML element
 
 // P4 T3: Math.js
